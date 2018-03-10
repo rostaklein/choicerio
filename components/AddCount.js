@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addCount, setCount, setNumberAsTitle } from '../store'
+import { addCount, setCount, setNumberAsTitle } from '../store/actions'
 
 class AddCount extends Component {
   add = () => {

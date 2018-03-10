@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { setActiveUser } from '../store';
+import { setActiveUser } from '../store/actions';
 
 import Cookies from 'js-cookie';
 

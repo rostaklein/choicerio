@@ -3,7 +3,8 @@ import withRedux from 'next-redux-wrapper';
 import Cookies from 'js-cookie'
 import cookie from "cookie"
 
-import { initStore, addCount, setActiveUser } from "../store"
+import { initStore } from "../store/index"
+import { setActiveUser } from "../store/actions"
 import { get, getCurrentUser } from "../apiMethods"
 import Layout from './Layout';
 
@@ -26,7 +27,7 @@ export default Component => withRedux(initStore, state => ({ state }))(
       
           return Promise.all([get("/users"), userHandling()]).then(data=>
             {
-              //store.dispatch(setActiveUser(data[1]))
+              store.dispatch(setActiveUser(data[1]))
               return {
                 users: data[0]
               };
