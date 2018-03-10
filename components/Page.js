@@ -11,7 +11,7 @@ export default Component => withRedux(initStore, state => ({ state }))(
   class extends React.Component {
     static async getInitialProps({ store, isServer, req }) {
         const userHandling = () => new Promise((resolve, reject) => {
-            // console.log(req.headers);
+            //console.log(req.headers);
             let token;
             if (isServer){
               token = req.headers.cookie && cookie.parse(req.headers.cookie).token;
@@ -20,14 +20,13 @@ export default Component => withRedux(initStore, state => ({ state }))(
             }
             //console.log("Token", token)
             // let user;
-            if(isServer){
-              getCurrentUser(token).then(user=>resolve(user)).catch(err=>resolve(null));
-            }
+            getCurrentUser(token).then(user=>resolve(user)).catch(err=>resolve(null));
+            
           })
       
           return Promise.all([get("/users"), userHandling()]).then(data=>
             {
-              store.dispatch(setActiveUser(data[1]))
+              //store.dispatch(setActiveUser(data[1]))
               return {
                 users: data[0]
               };

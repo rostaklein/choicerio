@@ -17,10 +17,12 @@ const
     <nav>
       <ul className="menu">
         {
-          menuItems.map((item, i)=>
-            <Link href={item.link} key={i}>
-              <li>{item.name}</li>
-            </Link>
+          menuItems.map(item =>
+            <li key={item.name}>
+              <Link href={item.link}>
+                <a>{item.name}</a>
+              </Link>
+            </li>
           )
         }
       </ul>
