@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-creating-restful-apis",
+  "name": "choicerio",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -11,8 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "rostaklein",
+  "license": "",
   "dependencies": {
     "autoprefixer": "7.1.5",
     "babel-plugin-module-resolver": "^2.7.1",
@@ -32,6 +32,7 @@
     "next": "^5.0.0",
     "next-cookies": "^1.0.2",
     "next-redux-wrapper": "^1.0.0",
+    "node-fetch": "^2.1.1",
     "node-sass": "^4.4.0",
     "normalize.css": "^7.0.0",
     "postcss-easy-import": "^3.0.0",
@@ -40,6 +41,7 @@
     "raw-loader": "^0.5.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-facebook-login": "^4.0.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2",
