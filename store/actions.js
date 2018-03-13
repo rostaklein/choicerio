@@ -17,3 +17,6 @@ export const setNumberAsTitle = () => dispatch => {
 export const setActiveUser = (user) => dispatch => {
     return dispatch({ type: actionTypes.SETUSER, user: user})
 }
+export const logOut = () => dispatch => {
+    return dispatch({ type: actionTypes.SETUSER, user: null})
+}

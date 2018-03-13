@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { connect } from "react-redux"
-import Login from "./Login";
+import { bindActionCreators } from "redux"
+import { logOut } from '../store/actions'
+import Login from "./Login"
+import React, { Component } from 'react'
 
 const
   menuItems=[
@@ -12,24 +15,63 @@ const
       name: "About",
       link: "/about"
     }
-  ],
-  Header = (props) => (
-    <nav>
-      <ul className="menu">
-        {
-          menuItems.map(item =>
-            <li key={item.name}>
-              <Link href={item.link}>
-                <a>{item.name}</a>
-              </Link>
-            </li>
-          )
-        }
-      </ul>
-      {props.pageTitle}
-    </nav>
-),
-mapStateToProps = ({ pageTitle, user }) => ({ pageTitle, user })
+  ];
 
+class Header extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      profileDetailOpen: false
+    }
+  }
+  render () {
+    const props = this.props;
+    return (
+      <div>
+        <header>
+          <div className="left"></div>
+          <div className="center">
+            <div className="page-title">
+              {props.pageTitle && props.pageTitle}
+            </div>
+          </div>
+          <div className="right">
+            {props.user && 
+              <div className="user-profile" onClick={()=>this.setState({profileDetailOpen: !this.state.profileDetailOpen})}>
+                <span className="icon icon-person" /> {props.user.name}
+                {this.state.profileDetailOpen &&
+                    <ul className="dropdown-menu">
+                      {/* <li><span className="icon icon-question"></span> My Forms</li>
+                      <li><span className="icon icon-person"></span> Profile</li> */}
+                      <li onClick={()=>this.props.logOut()}><span className="icon icon-exit"></span> Log Out</li>
+                    </ul>
+                }
+              </div>
+            }
+          </div>
+        </header>
+        <ul className="menu">
+          {
+            menuItems.map(item =>
+              <li key={item.name}>
+                <Link href={item.link}>
+                  <a>{item.name}</a>
+                </Link>
+              </li>
+            )
+          }
+        </ul>
+      </div>
+    )
+  }
+};
 
-export default connect(mapStateToProps)(Header)
+const mapStateToProps = ({ pageTitle, user }) => ({ pageTitle, user })
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logOut: bindActionCreators(logOut, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

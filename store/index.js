@@ -5,7 +5,7 @@ import { reducer } from "./reducers"
 
 export const exampleInitialState = {
   count: 0,
-  pageTitle: "first",
+  pageTitle: null,
   user: null
 }
 

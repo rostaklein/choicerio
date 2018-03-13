@@ -14,7 +14,7 @@ const
         <ol>
           {props.users.map((user, i) => (
             <li key={i}>
-                {user.name} ({user.email}) <small>- <i className="fa fa-times" /></small>
+                {user.name} ({user.email}) <small>- <i className="icon-times" /></small>
             </li>
           ))}
         </ol>

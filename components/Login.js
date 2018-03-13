@@ -8,6 +8,8 @@ import Cookies from 'js-cookie';
 
 import { post, get } from "../apiMethods";
 
+import Loading from "./Loading"
+
 class Login extends Component {
   constructor(props){
     super(props);
@@ -84,11 +86,9 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.loading ? "loading" : ""}
+      <div style={{position: "relative"}}>
+        <Loading active={this.state.loading} dimmed />
         <h1>Login here</h1>
-        
-          
           {this.props.user ?
             <button onClick={this.logOff}>Unlog {this.props.user.name}</button>
             :
@@ -105,6 +105,7 @@ class Login extends Component {
               render={renderProps => (
                 <button onClick={renderProps.onClick}>Login using Facebook</button>
               )}
+              onClick={()=>this.setState({loading: true})}
               />
             </div>
           }
