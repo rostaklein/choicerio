@@ -14,8 +14,8 @@ export const post = (path, body) => new Promise((resolve, reject) => {
         },
         body: JSON.stringify(body)
     })
-    .then(data=> data.status!==200 ? reject(data.status) : data.json())
-    .then(res=> resolve(res));
+    .then(r => r.json().then(json => ({ok: r.ok, status: r.status, data: json})))
+    .then(r=> r.status!==200 ? reject(r.data) : resolve(r.data))
 })
 
 export const get = (path, token) => new Promise((resolve, reject) => {
@@ -28,8 +28,8 @@ export const get = (path, token) => new Promise((resolve, reject) => {
         'x-access-token': Cookies.get('token') || token || ""
         }
     })
-    .then(data=> data.status!==200 ? reject(data.status) : data.json())
-    .then(res=> resolve(res));
+    .then(r => r.json().then(json => ({ok: r.ok, status: r.status, data: json})))
+    .then(r=> r.status!==200 ? reject(r.data) : resolve(r.data))
 })
 
 export const getCurrentUser = (token) => new Promise((resolve, reject) => {

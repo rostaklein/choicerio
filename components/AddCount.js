@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addCount, setCount, setNumberAsTitle } from '../store/actions'
+import { addCount, setCount, setNumberAsTitle, setActiveModal } from '../store/actions'
+import Loading from "./Loading";
 
 class AddCount extends Component {
   add = () => {
@@ -11,6 +12,8 @@ class AddCount extends Component {
   setTo = (count) => {
     this.props.setCount(parseInt(count) || 0)
   }
+
+  loaderCosi = () => <Loading />
 
   render () {
     const { count } = this.props
@@ -40,7 +43,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addCount: bindActionCreators(addCount, dispatch),
     setCount: bindActionCreators(setCount, dispatch),
-    setNumberAsTitle: bindActionCreators(setNumberAsTitle, dispatch)
+    setNumberAsTitle: bindActionCreators(setNumberAsTitle, dispatch),
+    setActiveModal: bindActionCreators(setActiveModal, dispatch)
   }
 }
 

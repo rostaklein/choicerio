@@ -8,7 +8,6 @@ import Page from "../components/Page"
 const
   Index = (props) => (
       <div>
-        <Login />
         <h1>All users</h1>
         <small>Total users: {props.users.length}</small>
         <ol>

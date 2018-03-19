@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { logOut } from '../store/actions'
+import { logOut, setActiveModal } from '../store/actions'
 import Login from "./Login"
+import Modal from "./Modal"
 import React, { Component } from 'react'
 
 const
@@ -36,7 +37,7 @@ class Header extends Component {
             </div>
           </div>
           <div className="right">
-            {props.user && 
+            {props.user ?
               <div className="user-profile" onClick={()=>this.setState({profileDetailOpen: !this.state.profileDetailOpen})}>
                 <span className="icon icon-person" /> {props.user.name}
                 {this.state.profileDetailOpen &&
@@ -47,9 +48,17 @@ class Header extends Component {
                     </ul>
                 }
               </div>
+              :
+              <div className="user-profile" onClick={()=>this.props.setActiveModal({title: "Log in"})}>
+                <span className="icon icon-person" /> Log In
+              </div>
+
             }
           </div>
         </header>
+        <Modal>
+          <Login />
+        </Modal>
         <ul className="menu">
           {
             menuItems.map(item =>
@@ -70,7 +79,8 @@ const mapStateToProps = ({ pageTitle, user }) => ({ pageTitle, user })
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logOut: bindActionCreators(logOut, dispatch)
+    logOut: bindActionCreators(logOut, dispatch),
+    setActiveModal: bindActionCreators(setActiveModal, dispatch)
   }
 }
 

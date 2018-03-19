@@ -1,6 +1,6 @@
-import Header from './Header'
-import Head from './Head'
-import stylesheet from 'styles/index.scss'
+import Header from './Header';
+import Head from './Head';
+import stylesheet from 'styles/index.scss';
 
 const Layout = (props) => (
   <div className="layout">

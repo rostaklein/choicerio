@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "api": "node api/serverApi",
+    "api": "nodemon api/serverApi",
     "start": "node serverFrontend",
     "build": "next build",
     "prod": "next start",
@@ -15,6 +15,7 @@
   "license": "",
   "dependencies": {
     "autoprefixer": "7.1.5",
+    "axios": "^0.18.0",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-wrap-in-js": "^1.1.0",
     "bcryptjs": "^2.4.3",
@@ -40,6 +41,7 @@
     "postcss-url": "^7.3.0",
     "raw-loader": "^0.5.1",
     "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.2.0",
     "react-facebook-login": "^4.0.1",
     "react-redux": "^5.0.1",

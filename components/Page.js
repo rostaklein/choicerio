@@ -32,7 +32,10 @@ export default Component => withRedux(initStore, state => ({ state }))(
                 users: data[0]
               };
             }
-          ) 
+          ).catch(err=>{
+            store.dispatch(setActiveUser(null));
+              return 0;
+          }) 
     }
     render() {
       return (

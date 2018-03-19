@@ -56,14 +56,14 @@ router.post('/remove', VerifyToken, (req, res, next) =>
 router.post('/login', (req, res) => {
     let { password, email } = req.body;
     if(!password || !email){
-      return res.status(500).send({msg: 'Request sent with an empty body!'})
+      return res.status(500).send({msg: 'Fill both email and password.'})
     }
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) return res.status(500).send(err);
       if (!user) return res.status(404).send({msg: 'User not found.'});
-      if (user.facebook.id) return res.status(500).send({msg: "Facebook user found."});
+      if (user.facebook.id) return res.status(500).send({msg: "Use facebook to login."});
       var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-      if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
+      if (!passwordIsValid) return res.status(401).send({ auth: false, token: null, msg: "Password not valid." });
       var token = jwt.sign({ id: user._id }, config.secret, {
         expiresIn: 86400 // expires in 24 hours
       });

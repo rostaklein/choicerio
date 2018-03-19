@@ -139,3 +139,189 @@ nav{
     }
   }
 }
+
+.switch-nav{
+  margin: 0;
+  padding: 0 20px;
+  list-style-type: none;
+  display: flex;
+  li{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: $gray;
+    transition: all 0.3s;
+    font-size: 14px;
+    &:not(.active){
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    &.active{
+      color: $primary;
+      transition: all 0.3s;
+    }
+  }
+}
+
+.btn{
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  font-weight: 700;
+  font-size: 14px;
+  background: lighten($lightgray, 10);
+  transition: all 0.3s;
+  position: relative;
+  &:hover{
+    background: lighten($lightgray, 5);
+    transition: all 0.3s;
+    cursor: pointer;
+    span.text:after{
+      right: -18px !important;
+      transition: all 0.3s;
+    }
+  }
+  &.full{
+    width: 100%;
+  }
+  &.big{
+    padding: 20px 35px;
+  }
+  &.hasicon{
+    display: flex;
+    align-items: center;
+    .icon{
+      font-size: 18px;
+      margin-right: 15px;
+      color: $gray;
+    }
+  }
+  &.primary{
+    background-color: $primary;
+    color: white;
+    &:hover{
+      background-color: darken($primary, 5);
+    }
+  }
+  span.text:not(.nochevron){
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:after{
+      position: absolute;
+      font-family: 'fonticons';
+      content: "\e903";
+      opacity: 0.4;
+      top: 0;
+      right: -15px;
+      transition: all 0.3s;
+    }
+  }
+  &.disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+    transition: all 0.3s;
+  }
+}
+
+.form-separator{
+  height: 2px;
+  width: calc(100% - 20px);
+  background: $lightgray;
+  margin: 25px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span{
+    padding: 0 15px;
+    background: white;
+  }
+}
+
+.form-control{
+  display: flex;
+  position: relative;
+  margin-bottom: 10px;
+  transition: all 0.4s;
+  .icon{
+    position: absolute;
+    color: $lightgray;
+    font-size: 14px;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+  input{
+    flex: 1;
+    border: solid 1px lighten($lightgray, 10);
+    padding: 10px 10px 10px 40px;
+    box-shadow: none;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  &.has-error{
+    margin-bottom: 25px;
+    transition: all 0.4s;
+    .icon{
+      color: lighten($red-error, 20);
+      transition: all 0.3s;
+    }
+    input{
+      border-color: lighten($red-error, 30);
+      transition: all 0.3s;
+    }
+    .error{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -25px;
+      height: 25px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      color: $red-error;
+      span{
+        font-weight: bold;
+        margin: 0 5px;
+        opacity: 0.5;
+      }
+    }
+  }
+  &.has-success{
+    .icon{
+      color: $primary;
+      transition: all 0.3s;
+    }
+    input{
+      border-color: $success;
+      transition: all 0.3s;
+    }
+  }
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $gray;
+  font-weight: normal;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $gray;
+    font-weight: normal;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: $gray;
+    font-weight: normal;
+}
