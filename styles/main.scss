@@ -1,6 +1,6 @@
 @import 'normalize.css';
 @import "variables.scss";
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 html, body, #__next{
   height: 100%;
@@ -17,6 +17,7 @@ body{
   color: $black;
   -webkit-font-smoothing: antialiased;
   background-color: rgba(0,0,0,0.002);
+  font-weight: 400;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -34,14 +35,25 @@ body{
   min-height: 100%;
   margin: 0 auto;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
   @media (min-width: $small-size) and (max-width: $medium-size) {
     padding: 0 40px;
   }
 }
 
+.centered-layout{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 header{
   display: flex;
   font-size: 14px;
+  width: 100%;
   .left, .right{
     width: 150px;
   }
@@ -172,9 +184,11 @@ nav{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 15px;
+  padding: 12px 35px 12px 20px;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   background: lighten($lightgray, 10);
   transition: all 0.3s;
   position: relative;
@@ -192,6 +206,16 @@ nav{
   }
   &.big{
     padding: 20px 35px;
+    text-transform: none;
+    font-size: 14px;
+    letter-spacing: normal;
+    &.fb{
+      background-color: #3b5998;
+      color: white;
+      &:hover{
+        background-color: darken(#3b5998, 10);
+      }
+    }
   }
   &.hasicon{
     display: flex;
@@ -199,7 +223,7 @@ nav{
     .icon{
       font-size: 18px;
       margin-right: 15px;
-      color: $gray;
+      opacity: 0.5;
     }
   }
   &.primary{
@@ -266,9 +290,13 @@ nav{
     border: solid 1px lighten($lightgray, 10);
     padding: 10px 10px 10px 40px;
     box-shadow: none;
+    border-radius: 0;
     outline: none;
     font-size: 14px;
     transition: all 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
   &.has-error{
     margin-bottom: 25px;
@@ -324,4 +352,32 @@ nav{
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: $gray;
     font-weight: normal;
+}
+
+.message{
+  font-size: 13px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  &:before{
+    margin-right: 6px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+  }
+  &.error{
+    color: $red-error;
+    &:before{
+      content: "!";
+      color: white;
+      background-color: $red-error;
+    }
+  }
+  &.centered{
+    justify-content: center;
+  }
 }

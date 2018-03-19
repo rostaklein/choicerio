@@ -181,7 +181,7 @@ class Login extends Component {
               fields="email"
               callback={this.responseFacebook}
               render={renderProps => (
-                <button onClick={renderProps.onClick} className="btn full big hasicon">
+                <button onClick={renderProps.onClick} className="btn full big hasicon fb">
                   <Loading active={this.state.fbloading} inverted/>
                   <span className="icon icon-fb" />
                   <span className="text nochevron">Log in using Facebook</span>
@@ -210,10 +210,10 @@ class Login extends Component {
             :
             <div>
               <form onSubmit={this.register}>
-                {registerFields.map(input=>
+                {registerFields.map((input, i) =>
                     <div className={"form-control "+ (this.state[input.name] && (this.state.formError[input.name] ? "has-error" : "has-success"))} key={input.name}>
                       <span className={`icon icon-${input.icon}`} />
-                      <input placeholder={input.placeholder} name={input.name} type={input.type} onChange={(e)=>this.inputChange(e, input.match)}/>
+                      <input key={input+i} placeholder={input.placeholder} name={input.name} type={input.type} onChange={(e)=>this.inputChange(e, input.match)}/>
                       {(this.state[input.name] && this.state.formError[input.name]) && 
                         <div className="error">
                           <span>!</span> {this.state.formError[input.name]}
@@ -229,8 +229,12 @@ class Login extends Component {
               </form>
             </div>
           }
+          {this.state.msg &&
+            <div className="message error centered">
+               {this.state.msg}
+            </div>
+          }
         </div>
-        {this.state.msg && this.state.msg}
       </div>
     ) 
   }

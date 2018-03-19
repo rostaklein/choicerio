@@ -2,22 +2,25 @@ import Layout from '../components/Layout'
 import Link from 'next/link'
 import Login from "../components/Login"
 import AddCount from '../components/AddCount'
-
 import Page from "../components/Page"
+
+import stylesheet from 'styles/welcome-page.scss'
 
 const
   Index = (props) => (
-      <div>
-        <h1>All users</h1>
-        <small>Total users: {props.users.length}</small>
+      <div className="centered-layout welcome-page">
+        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+        <img src="/static/img/choicerio_logo.svg" alt="Choicerio Logo" className="welcome-logo"/>
+        <h1>Let people align their choices.</h1>
+        <h2>Make your own vote advice form!</h2>
         <ol>
-          {props.users.map((user, i) => (
-            <li key={i}>
-                {user.name} ({user.email}) <small>- <i className="icon-times" /></small>
-            </li>
-          ))}
+          <li>Set up the questions</li>
+          <li>Get responses from candidates</li>
+          <li>Let people align who do they side with</li>
         </ol>
-        <AddCount />
+        <button type="submit" className="btn primary">
+          <span className="text">Create vote advice form</span>
+        </button>
       </div>
   )
 

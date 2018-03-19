@@ -6,17 +6,28 @@ import Login from "./Login"
 import Modal from "./Modal"
 import React, { Component } from 'react'
 
-const
-  menuItems=[
-    {
-      name: "Home",
-      link: "/"
-    },
-    {
-      name: "About",
-      link: "/about"
-    }
-  ];
+// const
+//   menuItems=[
+//     {
+//       name: "Home",
+//       link: "/"
+//     },
+//     {
+//       name: "About",
+//       link: "/about"
+//     }
+//   ];    
+// {/* <ul className="menu">
+//   {
+//     menuItems.map(item =>
+//       <li key={item.name}>
+//         <Link href={item.link}>
+//           <a>{item.name}</a>
+//         </Link>
+//       </li>
+//     )
+//   }
+// </ul> */}
 
 class Header extends Component {
   constructor(props){
@@ -28,7 +39,6 @@ class Header extends Component {
   render () {
     const props = this.props;
     return (
-      <div>
         <header>
           <div className="left"></div>
           <div className="center">
@@ -55,22 +65,10 @@ class Header extends Component {
 
             }
           </div>
+          <Modal>
+            <Login />
+          </Modal>
         </header>
-        <Modal>
-          <Login />
-        </Modal>
-        <ul className="menu">
-          {
-            menuItems.map(item =>
-              <li key={item.name}>
-                <Link href={item.link}>
-                  <a>{item.name}</a>
-                </Link>
-              </li>
-            )
-          }
-        </ul>
-      </div>
     )
   }
 };
