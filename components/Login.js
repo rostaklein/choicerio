@@ -101,6 +101,7 @@ class Login extends Component {
       {
         //console.log("Everything okay, the user is: ",user)
         this.props.setActiveUser(user);
+        (this.props.modal && this.props.modal.afterSucc) && this.props.modal.afterSucc();
         this.props.setActiveModal(null);
         this.setState({
           loading: false
@@ -240,7 +241,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({user}) => ({user})
+const mapStateToProps = ({user, modal}) => ({user, modal})
 
 const mapDispatchToProps = (dispatch) => {
   return {

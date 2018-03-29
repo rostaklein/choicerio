@@ -8,7 +8,7 @@ import { setActiveUser } from "../store/actions"
 import { get, getCurrentUser } from "../apiMethods"
 import Layout from './Layout';
 
-export default Component => withRedux(initStore, state => ({ state }))(
+export default (Component, reqLogin) => withRedux(initStore, state => ({ state }))(
   class extends React.Component {
     static async getInitialProps({ store, isServer, req }) {
         const userHandling = () => new Promise((resolve, reject) => {
@@ -19,28 +19,35 @@ export default Component => withRedux(initStore, state => ({ state }))(
             }else{
               token = Cookies.get("token") || ""
             }
-            //console.log("Token", token)
             // let user;
-            getCurrentUser(token).then(user=>resolve(user)).catch(err=>resolve(null));
+            if(token){
+              getCurrentUser(token).then(user=>resolve(user)).catch(err=>resolve(null));
+            }else{
+              resolve(null)
+            }
             
           })
       
-          return Promise.all([get("/users"), userHandling()]).then(data=>
+          return userHandling().then(data=>
             {
-              store.dispatch(setActiveUser(data[1]))
-              return {
-                users: data[0]
-              };
+              return store.dispatch(setActiveUser(data))
             }
           ).catch(err=>{
-            store.dispatch(setActiveUser(null));
+              store.dispatch(setActiveUser(null));
               return 0;
           }) 
     }
     render() {
       return (
         <Layout {...this.props}>
-          <Component {...this.props} />
+          {(reqLogin && !this.props.state.user) ?
+            <div className="message error centered">
+              You need to log in before accessing this part of the app.
+            </div>
+          :
+            <Component {...this.props} />
+          }
+          
         </Layout>
       );
     }

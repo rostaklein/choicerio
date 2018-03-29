@@ -59,21 +59,21 @@ class Header extends Component {
                 }
               </div>
               :
-              <div className="user-profile" onClick={()=>this.props.setActiveModal({title: "Log in"})}>
+              <div className="user-profile" onClick={()=>this.props.setActiveModal({name: "login"})}>
                 <span className="icon icon-person" /> Log In
               </div>
 
             }
           </div>
-          <Modal>
-            <Login />
-          </Modal>
+          <Modal show={this.props.modal} onClose={()=>this.props.setActiveModal(null)}>
+            <Login afterSucc={this.props.modal && (() => this.props.modal.afterSucc())} />
+          </Modal> 
         </header>
     )
   }
 };
 
-const mapStateToProps = ({ pageTitle, user }) => ({ pageTitle, user })
+const mapStateToProps = ({ pageTitle, user, modal }) => ({ pageTitle, user, modal })
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -1,8 +1,8 @@
 import Layout from "../components/Layout"
 import Page from "../components/Page"
 
-const About = () => (
+const NewForm = () => (
     <h1>Much fun</h1>
 );
 
-export default Page(About);
+export default Page(NewForm, true);
