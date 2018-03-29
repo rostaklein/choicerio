@@ -43,7 +43,7 @@ class Header extends Component {
           <div className="left"></div>
           <div className="center">
             <div className="page-title">
-              {props.pageTitle && props.pageTitle}
+              {props.title && props.title}
             </div>
           </div>
           <div className="right">
@@ -73,7 +73,7 @@ class Header extends Component {
   }
 };
 
-const mapStateToProps = ({ pageTitle, user, modal }) => ({ pageTitle, user, modal })
+const mapStateToProps = ({ title, user, modal }) => ({ title, user, modal })
 
 const mapDispatchToProps = (dispatch) => {
   return {

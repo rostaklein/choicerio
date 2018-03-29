@@ -3,17 +3,9 @@ import { exampleInitialState } from "./index";
 
 export const reducer = (state = exampleInitialState, action) => {
     switch (action.type) {
-      case actionTypes.ADD:
+      case actionTypes.SETTITLE:
         return Object.assign({}, state, {
-          count: state.count + 1
-        })
-      case actionTypes.SETCOUNT:
-        return Object.assign({}, state, {
-          count: action.count
-        })
-      case actionTypes.SETNUMTITLE:
-        return Object.assign({}, state, {
-          pageTitle: state.count
+          title: action.title
         })
       case actionTypes.SETUSER:
         return Object.assign({}, state, {

@@ -5,4 +5,4 @@ const NewForm = () => (
     <h1>Much fun</h1>
 );
 
-export default Page(NewForm, true);
+export default Page(NewForm, true, "New form");

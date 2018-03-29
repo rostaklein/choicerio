@@ -1,21 +1,13 @@
 import Cookies from 'js-cookie';
 
 export const actionTypes = {
-    ADD: 'ADD',
-    SETCOUNT: 'SETCOUNT',
-    SETNUMTITLE: 'SETNUMTITLE',
+    SETTITLE: 'SETTITLE',
     SETUSER: 'SETUSER',
     SETMODAL: 'SETMODAL'
 };
 
-export const addCount = () => dispatch => {
-    return dispatch({ type: actionTypes.ADD });;
-};
-export const setCount = count => dispatch => {
-    return dispatch({ type: actionTypes.SETCOUNT, count: count });
-};
-export const setNumberAsTitle = () => dispatch => {
-    return dispatch({ type: actionTypes.SETNUMTITLE });
+export const setPageTitle = title => dispatch => {
+    return dispatch({ type: actionTypes.SETTITLE, title: title });
 };
 export const setActiveUser = user => dispatch => {
     return dispatch({ type: actionTypes.SETUSER, user: user});

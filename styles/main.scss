@@ -359,6 +359,8 @@ nav{
   padding: 10px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1;
   &:before{
     margin-right: 6px;
     font-weight: bold;
