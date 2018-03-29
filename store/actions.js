@@ -3,7 +3,8 @@ import Cookies from 'js-cookie';
 export const actionTypes = {
     SETTITLE: 'SETTITLE',
     SETUSER: 'SETUSER',
-    SETMODAL: 'SETMODAL'
+    SETMODAL: 'SETMODAL',
+    EDITFORM: 'EDITFORM'
 };
 
 export const setPageTitle = title => dispatch => {
@@ -18,4 +19,7 @@ export const logOut = () => dispatch => {
 };
 export const setActiveModal = modal => dispatch => {
     return dispatch({ type: actionTypes.SETMODAL, modal: modal})
+}
+export const editForm = property => dispatch => {
+    return dispatch({ type: actionTypes.EDITFORM, property: property})
 }

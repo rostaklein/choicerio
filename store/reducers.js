@@ -15,6 +15,11 @@ export const reducer = (state = exampleInitialState, action) => {
         return Object.assign({}, state, {
           modal: action.modal
         })
+      case actionTypes.EDITFORM:
+        console.log(state.form);
+        return Object.assign({}, state, {
+          form: {...state.form, ...action.property}
+        })
         
       default: return state
     }

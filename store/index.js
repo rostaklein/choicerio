@@ -6,7 +6,8 @@ import { reducer } from "./reducers"
 export const exampleInitialState = {
   title: null,
   user: null,
-  modal: null
+  modal: null,
+  form: {}
 }
 
 export const initStore = (initialState = exampleInitialState) => {

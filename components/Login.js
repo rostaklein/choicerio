@@ -212,7 +212,7 @@ class Login extends Component {
             <div>
               <form onSubmit={this.register}>
                 {registerFields.map((input, i) =>
-                    <div className={"form-control "+ (this.state[input.name] && (this.state.formError[input.name] ? "has-error" : "has-success"))} key={input.name}>
+                    <div className={"form-control has-icon "+ (this.state[input.name] && (this.state.formError[input.name] ? "has-error" : "has-success"))} key={input.name}>
                       <span className={`icon icon-${input.icon}`} />
                       <input key={input+i} placeholder={input.placeholder} name={input.name} type={input.type} onChange={(e)=>this.inputChange(e, input.match)}/>
                       {(this.state[input.name] && this.state.formError[input.name]) && 
