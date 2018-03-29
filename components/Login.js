@@ -194,11 +194,11 @@ class Login extends Component {
                 <span>or</span>
               </div>
               <form onSubmit={this.loadUser}>
-                <div className="form-control">
+                <div className="form-control has-icon">
                   <span className="icon icon-envelope" />
                   <input placeholder="Email Address" name="email" type="text" onChange={this.inputChange}/>
                 </div>
-                <div className="form-control">
+                <div className="form-control has-icon">
                   <span className="icon icon-lock" />
                   <input placeholder="Password" name="password" type="password" onChange={this.inputChange}/>
                 </div>

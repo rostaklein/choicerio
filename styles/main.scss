@@ -285,7 +285,7 @@ nav{
     justify-content: center;
     transition: all 0.3s;
   }
-  .has-icon{
+  &.has-icon{
     input{
       padding: 10px 10px 10px 40px;
     }

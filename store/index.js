@@ -7,7 +7,11 @@ export const exampleInitialState = {
   title: null,
   user: null,
   modal: null,
-  form: {}
+  form: {
+    name: "",
+    description: "",
+    questions: []
+  }
 }
 
 export const initStore = (initialState = exampleInitialState) => {
