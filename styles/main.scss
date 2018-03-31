@@ -37,8 +37,11 @@ body{
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  @media (min-width: $small-size) and (max-width: $medium-size) {
-    padding: 0 40px;
+  @media (max-width: $medium-size) {
+    padding: 0 20px;
+  }
+  @media (max-width: $small-size) {
+    padding: 0 10px;
   }
 }
 
@@ -56,6 +59,9 @@ header{
   width: 100%;
   .left, .right{
     width: 150px;
+    @media (max-width: $medium-size) {
+      width: auto;
+    }
   }
   .center{
     flex: 1;
@@ -311,6 +317,9 @@ nav{
     &.huge{
       font-size: 32px;
       font-weight: bold;
+      @media (max-width: $medium-size){
+        font-size: 22px;
+      }
       &::placeholder {
         font-weight: bold;
       }
@@ -323,6 +332,9 @@ nav{
     }
     &.medium{
       font-size: 18px;
+      @media (max-width: $medium-size){
+        font-size: 14px;
+      }
       color: $gray;
     }
   }
@@ -369,17 +381,24 @@ nav{
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: $gray;
   font-weight: normal;
+  font-family: $font;
   opacity: 1; /* Firefox */
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: $gray;
+    font-family: $font;
     font-weight: normal;
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: $gray;
+    font-family: $font;
     font-weight: normal;
+}
+
+input{
+  font-family: $font;
 }
 
 .message{
