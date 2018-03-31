@@ -119,12 +119,6 @@ class EditableList extends Component {
                                     }
                                     <span onClick={()=>this.deleteItem(item)} className="icon icon-times" />
                                 </div>
-                                <Transition
-                                    transitionName="animate-height"
-                                    transitionEnterTimeout={800}
-                                    transitionLeaveTimeout={800}
-                                    component="div"
-                                >
                                 {
                                     this.state.selectedItem===item &&
                                     <div className="description">
@@ -139,7 +133,6 @@ class EditableList extends Component {
                                         </div>
                                     </div>
                                 }
-                                </Transition>
                             </li>
                         )}
                         {
