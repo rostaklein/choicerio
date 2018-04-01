@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux"
 import { editForm, setPageTitle } from '../store/actions'
 import EditableList from "./EditableList";
 import Transition from 'react-addons-css-transition-group'
+import { post, get } from "../apiMethods";
+import Loading from "./Loading"
 
 const menuItems = ["Questions", "Candidates", "Statistics"];
 
@@ -12,7 +14,11 @@ class Form extends Component {
       super(props);
       this.state={
         ...props.form,
-        activeTab: menuItems[0]
+        activeTab: menuItems[0],
+        loading: {
+            submit: false
+        },
+        submitErrors: []
       }
     };
 
@@ -38,13 +44,35 @@ class Form extends Component {
     }
 
     onSubmit = () => {
+        this.setState({
+            triedSubmit: true
+        })
         if(this.state.valid){
             console.log("Is valid, submitting.", this.props.form);
+            this.setState({loading: {
+                ...this.state.loading,
+                submit: true
+            }});
+            post("/form/create", this.props.form).then(res => {
+                this.setState({loading: {
+                    ...this.state.loading,
+                    submit: false
+                }});
+                console.log(res);
+            }).catch(err=>{
+                this.setState({loading: {
+                    ...this.state.loading,
+                    submit: false
+                },
+                submitErrors: [
+                    ...this.state.submitErrors,
+                    err.msg
+                ]});
+                console.log(err.msg);
+            });
+            get("/form/my").then(res => console.log(res));
         }else{
             this.checkErrors();
-            this.setState({
-                triedSubmit: true
-            })
         }
     }
 
@@ -59,6 +87,7 @@ class Form extends Component {
                 }
             }
         });
+
         this.setState({
             errors,
             valid: Object.keys(errors).length==0
@@ -114,6 +143,7 @@ class Form extends Component {
                     </button>
                 }
                 <button type="submit" className={"btn primary "+(this.state.valid ? "" : "disabled")} onClick={this.onSubmit}>
+                    <Loading active={this.state.loading.submit} inverted/>
                     <span className="text">Submit &amp; save</span>
                 </button>          
             </div>
@@ -127,6 +157,11 @@ class Form extends Component {
                     {Object.keys(this.state.errors).map(errorKey =>
                         <div className="message error centered" key={errorKey}>
                             {this.state.errors[errorKey]}
+                        </div>
+                    )}
+                    {this.state.submitErrors.map(error=>
+                        <div className="message error centered" key={error}>
+                            {error}
                         </div>
                     )}
                     </Transition>
