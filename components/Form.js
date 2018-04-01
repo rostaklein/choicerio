@@ -43,7 +43,11 @@ class Form extends Component {
             <div className="form-control">
                 <input type="text" name="description" className="transparent medium" placeholder="Enter description" onChange={this.inputChange} value={this.state.description}/>
             </div>
-            <EditableList items={this.state.questions} onItemsChange={(items) => this.editStateAndRedux("questions", items)} />
+            <EditableList
+                items={this.state.questions}
+                onItemsChange={(items) => this.editStateAndRedux("questions", items)}
+                itemName="Question"
+            />
         </div>
         )
     }

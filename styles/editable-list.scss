@@ -131,21 +131,21 @@
   &-enter{
     max-height: 0;
     opacity: 0.01;
-    transition: all 800ms ease;
+    transition: all 800ms;
     &-active{
       max-height: 50px;
       opacity: 1;
-      transition: all 800ms ease;
+      transition: all 800ms;
     }
   }
   &-leave{
     max-height: 50px;
     opacity: 1;
-    transition: all 800ms ease;
+    transition: all 800ms;
     &-active{
       max-height: 0;
       opacity: 0.01;
-      transition: all 800ms ease;
+      transition: all 800ms;
     }
   }
 }

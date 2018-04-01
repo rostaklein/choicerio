@@ -6,17 +6,29 @@ class EditableList extends Component {
     constructor(props){
         super(props);
         this.state={
-            newQuestion: {
+            newItem: {
                 title: null,
                 description: null
             },
             selectedItem: null
         }
     }
+
+    componentDidMount(){
+        this.newInput.focus(); 
+     }
+
     keyDown = e => {
         if(e.keyCode === 13) {
             this.addNew();
         }
+    }
+    newItem = () => {
+        console.log("Clicked on new item");
+        this.setState({selectedItem: null});
+        setTimeout(()=>this.newInput.focus(), 0);
+        
+        console.log(this.state.selectedItem);
     }
 
     addNew = () => {
@@ -26,6 +38,7 @@ class EditableList extends Component {
                 description: null
             }
         })
+        this.newInput.value = "";
         this.props.onItemsChange([...this.props.items, {...this.state.newItem, order: this.props.items.length+1}]);
     }
 
@@ -75,6 +88,18 @@ class EditableList extends Component {
         this.setState({
             selectedItem: edited
         })
+        
+    }
+    setSelected = item => {
+        if(item!=this.state.selectedItem){
+            this.setState({selectedItem: item});
+            setTimeout(()=>this.editInput.focus(), 0);
+        }
+    }
+    moveCursorToTheEnd = e => {
+        let val = e.target.value;
+        e.target.value = '';
+        e.target.value = val;
     }
     render() {
         return(
@@ -90,22 +115,24 @@ class EditableList extends Component {
                             <li
                                 key={i}
                                 className={this.state.selectedItem === item ? "active" : ""}
-                                onClick={()=>this.setState({selectedItem: item})}
+                                onClick={()=>this.setSelected(item)}
                             >
                                 {
                                     this.state.selectedItem===item ?
                                     <div className="form-control value">
                                         <input
                                             type="text"
-                                            placeholder="Question"
+                                            placeholder={this.props.itemName}
                                             name="title"
+                                            ref={input => this.editInput = input}
                                             value={this.state.selectedItem.title}
                                             onChange={(e) => this.editExisting(e, item)}
+                                            onFocus={this.moveCursorToTheEnd}
                                         />
                                     </div>
                                     :
                                     <div className="value">
-                                        {item.title ? item.title : <span className="no-value">Question without title</span>}
+                                        {item.title ? item.title : <span className="no-value">{this.props.itemName} without title</span>}
                                     </div>
                                 }
                                 <div className="toolbar">
@@ -125,7 +152,7 @@ class EditableList extends Component {
                                         <div className="form-control value">
                                             <input
                                                 type="text"
-                                                placeholder="Question detail"
+                                                placeholder={this.props.itemName + " description"} 
                                                 name="description"
                                                 value={this.state.selectedItem.description}
                                                 onChange={(e) => this.editExisting(e, item)}
@@ -139,7 +166,7 @@ class EditableList extends Component {
                             !this.state.selectedItem &&
                             <li className="active new">
                                 <div className="form-control value">
-                                    <input type="text" placeholder="Question" onKeyDown={this.keyDown} onChange={(e) => this.setState({newItem: {...this.state.newQuestion, title: e.target.value}})}/>
+                                    <input ref={input => this.newInput = input} type="text" placeholder={this.props.itemName} onKeyDown={this.keyDown} onChange={(e) => this.setState({newItem: {...this.state.newItem, title: e.target.value}})}/>
                                 </div>
                                 <span className="icon icon-plus" onClick={()=>this.addNew()}/>
                             </li>
@@ -147,8 +174,8 @@ class EditableList extends Component {
                         </Transition>
                     </ol>
                     {this.state.selectedItem &&
-                        <div onClick={()=>this.setState({selectedItem: null})} className="new-item">
-                            <span className="icon icon-plus" /> Add new question
+                        <div onClick={()=>this.newItem()} className="new-item">
+                            <span className="icon icon-plus" /> Add new {this.props.itemName.toLowerCase()}
                         </div>
                     }
                 </div>
