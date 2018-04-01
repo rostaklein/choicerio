@@ -132,7 +132,7 @@ class EditableList extends Component {
                                     </div>
                                     :
                                     <div className="value">
-                                        {item.title ? item.title : <span className="no-value">{this.props.itemName} without title</span>}
+                                        {item.title ? item.title : <span className="no-value">{this.props.itemName} without title</span>} <span className="desc-preview">{item.description}</span>
                                     </div>
                                 }
                                 <div className="toolbar">

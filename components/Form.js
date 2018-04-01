@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { editForm, setPageTitle } from '../store/actions'
 import EditableList from "./EditableList";
+import Transition from 'react-addons-css-transition-group'
 
 const menuItems = ["Questions", "Candidates", "Statistics"];
 
@@ -38,7 +39,7 @@ class Form extends Component {
 
     onSubmit = () => {
         if(this.state.valid){
-            console.log("Is valid, submitting.");
+            console.log("Is valid, submitting.", this.props.form);
         }else{
             this.checkErrors();
             this.setState({
@@ -51,13 +52,13 @@ class Form extends Component {
         let toCheck = ["questions", "candidates"];
         let errors={};
         toCheck.forEach(property => {
-            if(this.props.form[property].length<1){
+            if(this.props.form[property].length<2){
                 errors={
                     ...errors,
-                    [property]: "You need to enter at least one "+property.substr(0, property.length-1)
+                    [property]: "You need to enter at least two "+property
                 }
             }
-        })
+        });
         this.setState({
             errors,
             valid: Object.keys(errors).length==0
@@ -118,11 +119,17 @@ class Form extends Component {
             </div>
             {this.state.triedSubmit &&
                 <div className="form-errors">
+                    <Transition
+                        transitionName="animate-height"
+                        transitionEnterTimeout={800}
+                        transitionLeaveTimeout={800}
+                    >
                     {Object.keys(this.state.errors).map(errorKey =>
-                        <div className="message error centered">
+                        <div className="message error centered" key={errorKey}>
                             {this.state.errors[errorKey]}
                         </div>
                     )}
+                    </Transition>
                 </div>
             }
         </div>
