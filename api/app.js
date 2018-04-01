@@ -15,6 +15,8 @@ app.options('*', cors());
 
 var UserController = require('./user/UserController');
 app.use('/api/users', UserController);
+var FormController = require('./form/FormController');
+app.use('/api/form', FormController);
 var AuthController = require('./auth/AuthController');
 app.use('/api/auth', AuthController);
 
