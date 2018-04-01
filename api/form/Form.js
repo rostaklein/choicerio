@@ -4,7 +4,9 @@ var FormSchema = new mongoose.Schema({
   description: String,
   url: {type: String, unique: true},
   createdAt: {type: Date, default: Date.now},
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  questions: [{type: mongoose.Schema.Types.ObjectId, ref: 'Question'}],
+  candidates: [{type: mongoose.Schema.Types.ObjectId, ref: 'Candidate'}]
 });
 mongoose.model('Form', FormSchema);
 

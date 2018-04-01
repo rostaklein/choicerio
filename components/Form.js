@@ -70,7 +70,6 @@ class Form extends Component {
                 ]});
                 console.log(err.msg);
             });
-            get("/form/my").then(res => console.log(res));
         }else{
             this.checkErrors();
         }
@@ -145,6 +144,9 @@ class Form extends Component {
                 <button type="submit" className={"btn primary "+(this.state.valid ? "" : "disabled")} onClick={this.onSubmit}>
                     <Loading active={this.state.loading.submit} inverted/>
                     <span className="text">Submit &amp; save</span>
+                </button>          
+                <button type="submit" className={"btn"} onClick={()=>get("/form/my").then(res => console.log(res))}>
+                    <span className="text">Check all of my</span>
                 </button>          
             </div>
             {this.state.triedSubmit &&
