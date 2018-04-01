@@ -10,7 +10,8 @@ export const exampleInitialState = {
   form: {
     name: "",
     description: "",
-    questions: []
+    questions: [],
+    candidates: []
   }
 }
 
