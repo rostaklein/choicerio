@@ -4,7 +4,8 @@ export const actionTypes = {
     SETTITLE: 'SETTITLE',
     SETUSER: 'SETUSER',
     SETMODAL: 'SETMODAL',
-    EDITFORM: 'EDITFORM'
+    EDITFORM: 'EDITFORM',
+    SETFORMDATA: 'SETFORMDATA'
 };
 
 export const setPageTitle = title => dispatch => {
@@ -19,6 +20,9 @@ export const logOut = () => dispatch => {
 };
 export const setActiveModal = modal => dispatch => {
     return dispatch({ type: actionTypes.SETMODAL, modal: modal})
+}
+export const setFormData = formData => dispatch => {
+    return dispatch({ type: actionTypes.SETFORMDATA, form: formData})
 }
 export const editForm = property => dispatch => {
     return dispatch({ type: actionTypes.EDITFORM, property: property})

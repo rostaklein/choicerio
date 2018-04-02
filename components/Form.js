@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Router from 'next/router'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { editForm, setPageTitle } from '../store/actions'
@@ -13,7 +14,6 @@ class Form extends Component {
     constructor(props){
       super(props);
       this.state={
-        ...props.form,
         activeTab: menuItems[0],
         loading: {
             submit: false
@@ -54,11 +54,13 @@ class Form extends Component {
                 submit: true
             }});
             post("/form/create", this.props.form).then(res => {
-                this.setState({loading: {
-                    ...this.state.loading,
-                    submit: false
-                }});
-                console.log(res);
+                this.setState({
+                    loading: {
+                        ...this.state.loading,
+                        submit: false,
+                    }
+                });
+                Router.push("/q/"+res.url+"/edit");
             }).catch(err=>{
                 this.setState({loading: {
                     ...this.state.loading,
@@ -103,10 +105,10 @@ class Form extends Component {
         return(
             <div>
             <div className="form-control">
-                <input type="text" name="name" className="transparent huge" placeholder="Enter form name" onChange={this.inputChange} value={this.state.name}/>
+                <input type="text" name="name" className="transparent huge" placeholder="Enter form name" onChange={this.inputChange} value={this.props.form.name}/>
             </div>
             <div className="form-control">
-                <input type="text" name="description" className="transparent medium" placeholder="Enter description" onChange={this.inputChange} value={this.state.description}/>
+                <input type="text" name="description" className="transparent medium" placeholder="Enter description" onChange={this.inputChange} value={this.props.form.description}/>
             </div>
             <ul className="switch-nav huge-icons" style={{marginBottom: 20}}>
                 {menuItems.map(item => 
@@ -122,14 +124,14 @@ class Form extends Component {
             </ul>
             {this.state.activeTab === "Questions" &&
                 <EditableList
-                    items={this.state.questions}
+                    items={this.props.form.questions}
                     onItemsChange={(items) => this.editStateAndRedux("questions", items)}
                     itemName="Question"
                 />
             }
             {this.state.activeTab === "Candidates" &&
                 <EditableList
-                    items={this.state.candidates}
+                    items={this.props.form.candidates}
                     onItemsChange={(items) => this.editStateAndRedux("candidates", items)}
                     itemName="Candidate"
                 />
@@ -153,7 +155,7 @@ class Form extends Component {
                 </button>          
                 <button type="submit" className={"btn"} onClick={()=>get("/form/my").then(res => console.log(res))}>
                     <span className="text">Check all of my</span>
-                </button>          
+                </button>                       
             </div>
             {this.state.triedSubmit &&
                 <div className="form-errors">

@@ -26,7 +26,7 @@ router.post('/register', (req, res) => {
       var token = jwt.sign({ id: user._id }, config.secret, {
         expiresIn: 86400 // expires in 24 hours
       });
-      res.status(200).send({ auth: true, token: token });
+      return res.status(200).send({ auth: true, token: token });
     }); 
 });
 
@@ -35,9 +35,9 @@ router.get('/me', VerifyToken, (req, res, next) =>
         req.userId,
         { password: 0 },
         (err, user) => {
-            err && res.status(500).send(err);
-            !user && res.status(404).send({msg: "No user found."});
-            res.status(200).send(user);
+            if(err) return res.status(500).send(err);
+            if(!user) return res.status(404).send({msg: "No user found."});
+            return res.status(200).send(user);
         }
     )
 );
@@ -46,9 +46,9 @@ router.post('/remove', VerifyToken, (req, res, next) =>
     User.remove(
         {_id: req.userId},
         (err, user) => {
-            err && res.status(500).send(err);
-            !user && res.status(404).send({msg: "No user found."});
-            res.status(200).send({msg: "Successfully removed", user: user});
+            if(err) return res.status(500).send(err);
+            if(!user) return res.status(404).send({msg: "No user found."});
+            return res.status(200).send({msg: "Successfully removed", user: user});
         }
     )
 );
@@ -67,7 +67,7 @@ router.post('/login', (req, res) => {
       var token = jwt.sign({ id: user._id }, config.secret, {
         expiresIn: 86400 // expires in 24 hours
       });
-      res.status(200).send({ auth: true, token: token });
+      return res.status(200).send({ auth: true, token: token });
     });
 });
 

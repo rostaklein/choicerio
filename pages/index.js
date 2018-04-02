@@ -8,10 +8,10 @@ import stylesheet from 'styles/welcome-page.scss'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
-import { setActiveUser, setActiveModal } from '../store/actions'
+import { setActiveModal } from '../store/actions'
 
 const
-  redirectTo = () => Router.push("/newform"),
+  redirectTo = () => Router.push("/new"),
   Index = (props) => (
       <div className="centered-layout welcome-page">
         <style dangerouslySetInnerHTML={{ __html: stylesheet }} />

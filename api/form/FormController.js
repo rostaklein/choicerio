@@ -16,22 +16,26 @@ router.get('/my', VerifyToken, (req, res, next) =>
         .populate('questions')
         .populate('candidates')
         .exec((err, forms) => {
-            err && res.status(500).send(err);
-            !forms && res.status(404).send({msg: "No forms found."});
-            res.status(200).send(forms);
+            if(err) return res.status(500).send(err);
+            if(!forms) return res.status(404).send({msg: "No forms found."});
+            return res.status(200).send(forms);
         }
     )
 );
 
-const saveItems = (name, items) => new Promise((resolve, reject) => {
-    [name].insertMany(items, (err, items) =>{
-        if(err){
-            reject(err);
-        }else{
-            resolve(items);
+router.get('/byurl/:url', (req, res, next) => 
+    Form.findOne(
+        {url: req.params.url})
+        .populate('createdBy')
+        .populate('questions')
+        .populate('candidates')
+        .exec((err, form) => {
+            if(err) return res.status(500).send(err);
+            if(!form) return res.status(404).send({msg: "No form found for "+req.params.url});
+            return res.status(200).send(form);
         }
-    })
-})
+    )
+);
 
 router.post('/create', VerifyToken, (req, res, next) => {
     let url = req.body.name.replace(/\s+/g, '_').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_]+/g, "");
@@ -63,7 +67,7 @@ router.post('/create', VerifyToken, (req, res, next) => {
                 },
                 (err, form) => {
                     if (err) return res.status(500).send(err);
-                    res.status(200).send(form);
+                    return res.status(200).send(form);
                 })
             })
             
