@@ -37,7 +37,7 @@ router.post('/create', VerifyToken, (req, res, next) => {
     let url = req.body.name.replace(/\s+/g, '_').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_]+/g, "");
     Form.findOne({url}, (err, form) => {
         if(form){
-            return res.status(500).send({msg: "This url already exists."});
+            return res.status(500).send({msg: "Form with this name already exists. Enter a new name, please."});
         }else{
             Promise.all([
                 new Promise((resolve, rej) =>{

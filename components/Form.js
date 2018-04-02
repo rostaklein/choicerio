@@ -86,6 +86,12 @@ class Form extends Component {
                 }
             }
         });
+        if(this.props.form.name.length==0){
+            errors={
+                ...errors,
+                name: "Please, set the form name."
+            }
+        }
 
         this.setState({
             errors,
