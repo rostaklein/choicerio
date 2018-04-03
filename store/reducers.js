@@ -5,7 +5,7 @@ export const reducer = (state = exampleInitialState, action) => {
     switch (action.type) {
       case actionTypes.SETTITLE:
         return Object.assign({}, state, {
-          title: action.title
+          pageTitle: action.pageTitle
         })
       case actionTypes.SETUSER:
         return Object.assign({}, state, {
@@ -18,6 +18,10 @@ export const reducer = (state = exampleInitialState, action) => {
       case actionTypes.SETFORMDATA:
         return Object.assign({}, state, {
           form: action.form
+        })
+      case actionTypes.RESETFORMDATA:
+        return Object.assign({}, state, {
+          form: exampleInitialState.form
         })
       case actionTypes.EDITFORM:
         return Object.assign({}, state, {

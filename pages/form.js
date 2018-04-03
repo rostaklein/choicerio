@@ -43,7 +43,7 @@ class DisplayForm extends Component {
                             this.props.form &&
                             ( this.props.url.query.edit ?
                                 ((this.props.user._id===this.props.form.createdBy._id) ?
-                                <Form />
+                                <Form editMode/>
                                 :
                                 <div className="message error centered"><b>{this.props.user.name}</b>&nbsp;is not permitted to edit&nbsp;<b>{this.props.form.name}</b>.</div>
                                 )

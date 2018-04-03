@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { reducer } from "./reducers"
 
 export const exampleInitialState = {
-  title: null,
+  pageTitle: "",
   user: null,
   modal: null,
   form: {

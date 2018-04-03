@@ -1,0 +1,38 @@
+@import "variables.scss";
+
+.my-forms{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li{
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s;
+        padding: 0px 10px 15px 10px;
+        &:nth-child(odd){
+            background-color: lighten($lightgray, 15);
+        }
+        &:hover{
+            cursor: pointer;
+            background-color: lighten($lightgray, 10);
+            transition: all 0.3s;
+        }
+        .bottom-part{
+           display: flex;
+           padding: 0 15px;
+           .item{
+               color: $gray;
+               font-size: 14px;
+               margin-right: 15px;
+               .icon{
+                   font-size: 10px;
+                   margin-right: 5px;
+                   opacity: 0.3;
+               }
+           } 
+        }
+        h2{
+            margin: 15px;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Router from 'next/router'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { logOut, setActiveModal } from '../store/actions'
@@ -43,7 +43,7 @@ class Header extends Component {
           <div className="left"></div>
           <div className="center">
             <div className="page-title">
-              {props.form.name.length>0 && props.form.name}
+              {props.pageTitle.length>0 && props.pageTitle}
             </div>
           </div>
           <div className="right">
@@ -54,6 +54,8 @@ class Header extends Component {
                     <ul className="dropdown-menu">
                       {/* <li><span className="icon icon-question"></span> My Forms</li>
                       <li><span className="icon icon-person"></span> Profile</li> */}
+                      <li onClick={()=>Router.push("/new")}><span className="icon icon-plus"></span> New Form</li>
+                      <li onClick={()=>Router.push("/myforms")}><span className="icon icon-questions" style={{fontSize: 10}}></span> My Forms</li>
                       <li onClick={()=>this.props.logOut()}><span className="icon icon-exit"></span> Log Out</li>
                     </ul>
                 }
@@ -73,7 +75,7 @@ class Header extends Component {
   }
 };
 
-const mapStateToProps = ({ form, user, modal }) => ({ form, user, modal })
+const mapStateToProps = ({ form, user, modal, pageTitle }) => ({ form, user, modal, pageTitle })
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -5,11 +5,12 @@ export const actionTypes = {
     SETUSER: 'SETUSER',
     SETMODAL: 'SETMODAL',
     EDITFORM: 'EDITFORM',
-    SETFORMDATA: 'SETFORMDATA'
+    SETFORMDATA: 'SETFORMDATA',
+    RESETFORMDATA: 'RESETFORMDATA'
 };
 
 export const setPageTitle = title => dispatch => {
-    return dispatch({ type: actionTypes.SETTITLE, title: title });
+    return dispatch({ type: actionTypes.SETTITLE, pageTitle: title });
 };
 export const setActiveUser = user => dispatch => {
     return dispatch({ type: actionTypes.SETUSER, user: user});
@@ -23,6 +24,9 @@ export const setActiveModal = modal => dispatch => {
 }
 export const setFormData = formData => dispatch => {
     return dispatch({ type: actionTypes.SETFORMDATA, form: formData})
+}
+export const resetFormData = () => dispatch => {
+    return dispatch({ type: actionTypes.RESETFORMDATA})
 }
 export const editForm = property => dispatch => {
     return dispatch({ type: actionTypes.EDITFORM, property: property})

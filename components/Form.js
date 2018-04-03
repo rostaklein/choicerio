@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Router from 'next/router'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { editForm, setPageTitle } from '../store/actions'
+import { editForm, setPageTitle, resetFormData } from '../store/actions'
 import EditableList from "./EditableList";
 import Transition from 'react-addons-css-transition-group'
 import { post, get } from "../apiMethods";
@@ -22,6 +22,12 @@ class Form extends Component {
       }
     };
 
+    componentDidMount(){
+        if(!this.props.editMode){
+            this.props.resetFormData();
+        }
+    }
+
     editStateAndRedux = (property, value) => {
         this.setState({
             [property]: value
@@ -36,9 +42,6 @@ class Form extends Component {
     }
 
     inputChange = (input) => {
-        if(input.target.name=="name"){
-            this.props.setPageTitle(input.target.value);
-        }
         this.editStateAndRedux(input.target.name, input.target.value);
         
     }
@@ -137,7 +140,7 @@ class Form extends Component {
                 />
             }
             <div className="form-buttons">
-                {!this.state.valid &&
+                {!this.state.valid && !this.props.editMode &&
                     <button type="submit" className={"btn"} onClick={()=>this.setState(
                         {
                             activeTab: this.state.activeTab === "Questions" ? "Candidates" : "Questions"
@@ -151,11 +154,8 @@ class Form extends Component {
                 }
                 <button type="submit" className={"btn primary "+(this.state.valid ? "" : "disabled")} onClick={this.onSubmit}>
                     <Loading active={this.state.loading.submit} inverted/>
-                    <span className="text">Submit &amp; save</span>
-                </button>          
-                <button type="submit" className={"btn"} onClick={()=>get("/form/my").then(res => console.log(res))}>
-                    <span className="text">Check all of my</span>
-                </button>                       
+                    <span className="text">{this.props.editMode ? "Save changes" : "Submit & save"}</span>
+                </button>
             </div>
             {this.state.triedSubmit &&
                 <div className="form-errors">
@@ -188,7 +188,7 @@ const mapStateToProps = ({ form }) => ({ form });
 const mapDispatchToProps = (dispatch) => {
     return {
       editForm: bindActionCreators(editForm, dispatch),
-      setPageTitle: bindActionCreators(setPageTitle, dispatch)
+      resetFormData: bindActionCreators(resetFormData, dispatch)
     }
   }
 
