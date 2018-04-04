@@ -222,6 +222,7 @@ nav{
   justify-content: center;
   padding: 12px 35px 12px 20px;
   text-transform: uppercase;
+  line-height: 1;
   //letter-spacing: -0.5px;
   font-weight: 700;
   font-size: 12px;
@@ -456,6 +457,13 @@ input{
       content: "!";
       color: white;
       background-color: $red-error;
+    }
+  }
+  &.info{
+    &:before{
+      content: "i";
+      color: white;
+      background-color: $gray;
     }
   }
   &.centered{

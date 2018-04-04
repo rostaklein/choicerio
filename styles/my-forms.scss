@@ -8,12 +8,18 @@
         display: flex;
         transition: all 0.3s;
         padding: 15px 10px;
+        @media (max-width: $medium-size){
+            flex-direction: column;
+        }
         &:nth-child(odd){
             background-color: lighten($lightgray, 15);
         }
         .buttons{
             display: flex;
             flex-direction: column;
+            @media (max-width: $medium-size){
+                flex-direction: row;
+            }
         }
         .info{
             display: flex;

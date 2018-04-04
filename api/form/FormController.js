@@ -12,7 +12,6 @@ var Candidate = require('./Candidate');
 router.get('/my', VerifyToken, (req, res, next) => 
     Form.find(
         {createdBy: req.userId})
-        .populate('createdBy')
         .populate('questions')
         .populate('candidates')
         .exec((err, forms) => {
@@ -38,6 +37,17 @@ router.get('/byurl/:url', (req, res, next) =>
 );
 
 router.post('/create', VerifyToken, (req, res, next) => {
+    //validation
+    if(
+        !req.body.questions ||
+        !req.body.candidates ||
+        !req.body.name ||
+        req.body.questions.length<2 ||
+        req.body.candidates.length<2 ||
+        req.body.name.length<3
+    ){
+        return res.status(500).send({msg: "Form not valid", body: req.body});
+    }
     let url = req.body.name.replace(/\s+/g, '_').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9_]+/g, "");
     Form.findOne({url}, (err, form) => {
         if(form){

@@ -43,6 +43,7 @@ class MyForms extends Component {
                         this.state.error ?
                         <div className="message error centered">{this.state.error.msg}</div>
                         :
+                        this.state.forms.length>0 ?
                         <div>
                             <ul className="my-forms">
                                 {
@@ -63,6 +64,10 @@ class MyForms extends Component {
                                     )
                                 }
                             </ul>
+                        </div>
+                        :
+                        <div className="huge message info centered">
+                                You have no forms created yet.
                         </div>
                     )
                 }
