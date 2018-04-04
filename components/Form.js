@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux"
 import { editForm, setPageTitle, resetFormData } from '../store/actions'
 import EditableList from "./EditableList";
 import Transition from 'react-addons-css-transition-group'
-import { post, get } from "../apiMethods";
+import { post, get, remove } from "../apiMethods";
 import Loading from "./Loading"
 
 const menuItems = ["Questions", "Candidates", "Statistics"];
@@ -25,6 +25,8 @@ class Form extends Component {
     componentDidMount(){
         if(!this.props.editMode){
             this.props.resetFormData();
+        }else{
+            this.checkErrors();
         }
     }
 
@@ -56,28 +58,56 @@ class Form extends Component {
                 ...this.state.loading,
                 submit: true
             }});
-            post("/form/create", this.props.form).then(res => {
-                this.setState({
-                    loading: {
+            if(!this.props.editMode){
+                //SUBMITING NEW FORM
+                post("/form/create", this.props.form).then(res => {
+                    this.setState({
+                        loading: {
+                            ...this.state.loading,
+                            submit: false,
+                        }
+                    });
+                    Router.push("/q/"+res.url+"/edit");
+                }).catch(err=>{
+                    this.setState({loading: {
                         ...this.state.loading,
-                        submit: false,
-                    }
+                        submit: false
+                    },
+                    submitErrors: [
+                        ...this.state.submitErrors,
+                        err.msg
+                    ]});
+                    console.log(err.msg);
                 });
-                Router.push("/q/"+res.url+"/edit");
-            }).catch(err=>{
-                this.setState({loading: {
-                    ...this.state.loading,
-                    submit: false
-                },
-                submitErrors: [
-                    ...this.state.submitErrors,
-                    err.msg
-                ]});
-                console.log(err.msg);
-            });
+            }else{
+                //UPDATING EXISTING FORM
+                console.log("Updating", this.props.form);
+            }
+           
         }else{
             this.checkErrors();
         }
+    }
+
+    onDelete = () => {
+        this.setState({loading: {
+            ...this.state.loading,
+            delete: true
+        }});
+        remove("/form/delete/"+this.props.form._id).then(res=>{
+            Router.push("/myforms");
+        }).catch(res=>{
+            this.setState({
+                loading: {
+                    ...this.state.loading,
+                    delete: false
+                },
+                errors: {
+                    ...this.state.errors,
+                    delete: "Could not delete this form."
+                }
+        });
+        })
     }
 
     checkErrors = () => {
@@ -157,6 +187,15 @@ class Form extends Component {
                     <span className="text">{this.props.editMode ? "Save changes" : "Submit & save"}</span>
                 </button>
             </div>
+            {this.props.editMode &&
+                <div className="form-buttons">
+                    <button type="submit" className={"btn nobg hasicon"} onClick={this.onDelete}>
+                    <Loading active={this.state.loading.delete} dimmed/>
+                    <span className="icon icon-bin"></span>
+                    Delete
+                </button>
+                </div>
+            }
             {this.state.triedSubmit &&
                 <div className="form-errors">
                     <Transition

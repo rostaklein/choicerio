@@ -32,6 +32,17 @@ export const get = (path, token) => new Promise((resolve, reject) => {
     .then(r=> r.status!==200 ? reject(r.data) : resolve(r.data))
 })
 
+export const remove = (path, token) => new Promise((resolve, reject) => {
+    fetch(apiUrl+path, {
+        method: "DELETE",
+        headers: {
+        'x-access-token': Cookies.get('token') || token || ""
+        }
+    })
+    .then(r => r.json().then(json => ({ok: r.ok, status: r.status, data: json})))
+    .then(r=> r.status!==200 ? reject(r.data) : resolve(r.data))
+})
+
 export const getCurrentUser = (token) => new Promise((resolve, reject) => {
     //console.log("Getting user by token: "+token)
     get("/auth/me", token)

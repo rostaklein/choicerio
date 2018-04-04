@@ -78,6 +78,19 @@ router.post('/create', VerifyToken, (req, res, next) => {
 }
 );
 
+router.delete('/delete/:id', VerifyToken, (req, res, next) => {
+        Form.findByIdAndRemove(req.params.id)
+            .exec((err, form) => {
+                if(err) return res.status(500).send(err);
+                if(!form) return res.status(404).send({msg: "No form found for "+req.params.url});
+                if(req.userId!=form.createdBy){
+                    return res.status(401).send({msg: "You are not authorized to delete this form."});
+                }
+                return res.status(200).send({msg: "Form deleted", form});
+            }
+        )
+    }
+);
 
 
 
