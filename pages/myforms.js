@@ -47,16 +47,19 @@ class MyForms extends Component {
                             <ul className="my-forms">
                                 {
                                     this.state.forms.map(form=>
-                                        
-                                            <Link href={"/q/"+form.url+"/edit"}>
-                                                <li>
-                                                    <div className="top-part"><h2 className="form-name">{form.name}</h2></div>
-                                                    <div className="bottom-part">
-                                                        <div className="item"><span className="icon icon-questions" />{form.questions.length} questions</div>
-                                                        <div className="item"><span className="icon icon-candidates" />{form.candidates.length} candidates</div>
-                                                    </div>
-                                                </li>
-                                            </Link>
+                                        <li key={form.url}>
+                                            <div className="buttons">
+                                                <Link href={"q/"+form.url+""}><button className="btn hasicon nobg"><span className="icon icon-eye"/><span className="text">View</span></button></Link>
+                                                <Link href={"q/"+form.url+"/edit"}><button className="btn hasicon nobg"><span className="icon icon-pencil"/> Edit</button></Link>
+                                            </div>
+                                            <div className="info">
+                                                <div className="top-part"><h2 className="form-name">{form.name}</h2></div>
+                                                <div className="bottom-part">
+                                                    <div className="item"><span className="icon icon-questions" />{form.questions.length} questions</div>
+                                                    <div className="item"><span className="icon icon-candidates" />{form.candidates.length} candidates</div>
+                                                </div>
+                                            </div>
+                                        </li>
                                     )
                                 }
                             </ul>

@@ -257,10 +257,12 @@ nav{
     display: flex;
     align-items: center;
     .icon{
-      font-size: 18px;
       margin-right: 15px;
       opacity: 0.5;
     }
+  }
+  &.nobg{
+    background: transparent;
   }
   &.primary{
     background-color: $primary;

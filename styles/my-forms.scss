@@ -6,23 +6,25 @@
     padding: 0;
     li{
         display: flex;
-        flex-direction: column;
         transition: all 0.3s;
-        padding: 0px 10px 15px 10px;
+        padding: 15px 10px;
         &:nth-child(odd){
             background-color: lighten($lightgray, 15);
         }
-        &:hover{
-            cursor: pointer;
-            background-color: lighten($lightgray, 10);
-            transition: all 0.3s;
+        .buttons{
+            display: flex;
+            flex-direction: column;
+        }
+        .info{
+            display: flex;
+            flex-direction: column;
         }
         .bottom-part{
            display: flex;
            padding: 0 15px;
            .item{
                color: $gray;
-               font-size: 14px;
+               font-size: 12px;
                margin-right: 15px;
                .icon{
                    font-size: 10px;
@@ -33,6 +35,7 @@
         }
         h2{
             margin: 15px;
+            font-size: 18px;
         }
     }
 }
