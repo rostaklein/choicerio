@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux"
 import { editForm, setPageTitle, resetFormData } from '../store/actions'
 import EditableList from "./EditableList";
 import Transition from 'react-addons-css-transition-group'
-import { post, get, remove } from "../apiMethods";
+import { post, get, remove, put } from "../apiMethods";
 import Loading from "./Loading"
 
 const menuItems = ["Questions", "Candidates", "Statistics"];
@@ -82,6 +82,26 @@ class Form extends Component {
             }else{
                 //UPDATING EXISTING FORM
                 console.log("Updating", this.props.form);
+                put("/form/"+this.props.form._id, this.props.form).then(res => {
+                    this.setState({
+                        loading: {
+                            ...this.state.loading,
+                            submit: false
+                        }
+                    });
+                    console.log("Updated with this response:", res);
+                    //Router.push("/q/"+res.url+"/edit");
+                }).catch(err=>{
+                    this.setState({loading: {
+                        ...this.state.loading,
+                        submit: false
+                    },
+                    submitErrors: [
+                        ...this.state.submitErrors,
+                        err.msg
+                    ]});
+                    console.log(err.msg);
+                });
             }
            
         }else{
@@ -94,7 +114,7 @@ class Form extends Component {
             ...this.state.loading,
             delete: true
         }});
-        remove("/form/delete/"+this.props.form._id).then(res=>{
+        remove("/form/"+this.props.form._id).then(res=>{
             Router.push("/myforms");
         }).catch(res=>{
             this.setState({

@@ -93,7 +93,7 @@ class EditableList extends Component {
     setSelected = item => {
         if(item!=this.state.selectedItem){
             this.setState({selectedItem: item});
-            setTimeout(()=>this.editInput.focus(), 0);
+            //setTimeout(()=>this.editInput.focus(), 0);
         }
     }
     moveCursorToTheEnd = e => {

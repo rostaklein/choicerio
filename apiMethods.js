@@ -18,6 +18,21 @@ export const post = (path, body) => new Promise((resolve, reject) => {
     .then(r=> r.status!==200 ? reject(r.data) : resolve(r.data))
 })
 
+export const put = (path, body) => new Promise((resolve, reject) => {
+    //console.log("PUT: "+apiUrl+path);
+    fetch(apiUrl+path, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': Cookies.get('token')
+        },
+        body: JSON.stringify(body)
+    })
+    .then(r => r.json().then(json => ({ok: r.ok, status: r.status, data: json})))
+    .then(r=> r.status!==200 ? reject(r.data) : resolve(r.data))
+})
+
 export const get = (path, token) => new Promise((resolve, reject) => {
     //console.log("GET: "+apiUrl+path);
     fetch(apiUrl+path, {
