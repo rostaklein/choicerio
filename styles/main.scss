@@ -45,6 +45,14 @@ body{
   }
 }
 
+main{
+  display: flex;
+  flex: 1;
+  >div{
+    flex: 1;
+  }
+}
+
 .centered-layout{
   flex: 1;
   display: flex;

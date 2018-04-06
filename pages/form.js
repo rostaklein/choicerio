@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
 import { setFormData } from '../store/actions'
 import Form from "../components/Form"
+import FormResponding from "../components/FormResponding";
 
 class DisplayForm extends Component {
     constructor(props){
@@ -31,32 +32,29 @@ class DisplayForm extends Component {
     }
     render(){
         return(
-            <div>
-                {this.state.loading ?
-                    <Loading active dimmed/>
+            this.state.loading ?
+                <Loading active dimmed/>
+                :
+                (
+                    this.state.error ?
+                    <div className="message error centered">{this.state.error.msg}</div>
                     :
                     (
-                        this.state.error ?
-                        <div className="message error centered">{this.state.error.msg}</div>
-                        :
-                        (
-                            this.props.form &&
-                            ( this.props.url.query.action=="edit" ?
-                                ((this.props.user._id===this.props.form.createdBy._id) ?
+                        this.props.form &&
+                        ( (this.props.url.query.action=="edit" && this.props.user) ?
+                            (
+                                (this.props.user._id===this.props.form.createdBy._id) ?
                                 <Form editMode/>
                                 :
                                 <div className="message error centered"><b>{this.props.user.name}</b>&nbsp;is not permitted to edit&nbsp;<b>{this.props.form.name}</b>.</div>
-                                )
-                                :
-                                <div>{JSON.stringify(this.props.form)}</div>
                             )
-                            
-                            
+                            :
+                            <FormResponding />
                         )
+                        
+                        
                     )
-                }
-            </div>
-            
+                ) 
         )
     }
 };
@@ -74,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default Page(connect(mapStateToProps, mapDispatchToProps)(DisplayForm), true)
+export default Page(connect(mapStateToProps, mapDispatchToProps)(DisplayForm))
