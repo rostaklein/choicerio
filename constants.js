@@ -1,1 +1,1 @@
-export const apiUrl = "https://choicerio-api.herokuapp.com";
+export const apiUrl = (process.env.NODE_ENV == "production") ? "https://choicerio-api.herokuapp.com" : "http://localhost:5000";

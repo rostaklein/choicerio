@@ -5,3 +5,4 @@ npm-debug.log
 variables.env
 .next
 package-lock.json
+.env
