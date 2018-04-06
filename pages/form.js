@@ -49,7 +49,7 @@ class DisplayForm extends Component {
                                 <div className="message error centered"><b>{this.props.user.name}</b>&nbsp;is not permitted to edit&nbsp;<b>{this.props.form.name}</b>.</div>
                             )
                             :
-                            <FormResponding />
+                            <FormResponding query={this.props.url.query}/>
                         )
                         
                         

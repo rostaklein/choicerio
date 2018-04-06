@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { logOut } from '../store/actions';
 import React, { Component } from 'react';
+import { Link } from '../routes'
 import stylesheet from 'styles/responding.scss';
 
 const steps = ["start", "responding", "results"];
@@ -14,6 +15,10 @@ class FormResponding extends Component {
     }
   }
   render () {
+    let
+      query = this.props.query,
+      step = parseInt(query.stepnumber),
+      questions = this.props.form.questions;
     return (
         <article className="form-responding">
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
@@ -34,11 +39,34 @@ class FormResponding extends Component {
             }
           </ul>
           <div className="group-bot">
-            <button className="btn primary">
-              <span className="text">Start now</span>
-            </button>
+            {/* <Link route={"/q/"+this.props.query.id+"/s/"+(this.props.query.stepnumber+1 || 1)}> */}
+            <Link route={"/q/"+query.id+"/s/1"}>
+              <button className="btn primary">
+                <span className="text">Start now</span>
+              </button>
+            </Link>
             <div className="who-is">Who is the best choice for you?</div>
           </div>
+          { (query.action=="s" && step) &&
+            <div>
+              {step>1 &&
+                <Link route={"/q/"+query.id+"/s/" + (step-1)}>
+                  <button className="btn primary">
+                    prev
+                  </button>
+                </Link>
+              }
+              {step<questions.length &&
+                <Link route={"/q/"+query.id+"/s/" + (step+1)}>
+                  <button className="btn primary">
+                    next
+                  </button>
+                </Link>
+              }
+              {JSON.stringify(questions[step-1])}
+            </div>
+            }
+            
         </article>
     )
   }
