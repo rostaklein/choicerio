@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server",
     "build": "next build",
-    "prod": "NODE_ENV=production node server"
+    "prod": "NODE_ENV=production node server",
+    "heroku-postbuild": "next build"
   },
   "author": "rostaklein",
   "license": "",
