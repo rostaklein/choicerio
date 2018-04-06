@@ -41,7 +41,7 @@ class DisplayForm extends Component {
                         :
                         (
                             this.props.form &&
-                            ( this.props.url.query.edit ?
+                            ( this.props.url.query.action=="edit" ?
                                 ((this.props.user._id===this.props.form.createdBy._id) ?
                                 <Form editMode/>
                                 :
