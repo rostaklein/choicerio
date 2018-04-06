@@ -4,12 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "api": "nodemon api/serverApi",
-    "start": "node serverFrontend",
+    "start": "node server",
     "build": "next build",
-    "prod": "NODE_ENV=production node serverFrontend && NODE_ENV=production nodemon api/serverApi",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next"
+    "prod": "NODE_ENV=production node server"
   },
   "author": "rostaklein",
   "license": "",
