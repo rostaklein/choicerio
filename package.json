@@ -13,9 +13,11 @@
   "license": "",
   "dependencies": {
     "autoprefixer": "7.1.5",
+    "babel-eslint": "^8.2.2",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-wrap-in-js": "^1.1.0",
     "cookie": "^0.3.1",
+    "eslint": "^4.19.1",
     "express": "^4.16.2",
     "express-sslify": "^1.2.0",
     "glob": "^7.1.2",
