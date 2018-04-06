@@ -1,7 +1,6 @@
 import Layout from '../components/Layout'
 import Router from 'next/router'
 import Login from "../components/Login"
-import AddCount from '../components/AddCount'
 import Page from "../components/Page"
 
 import stylesheet from 'styles/welcome-page.scss'
