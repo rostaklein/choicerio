@@ -15,7 +15,10 @@ app.prepare()
 
   server.use(handler);
   
-  if(!dev) server.use(enforce.HTTPS());
+  if(!dev){
+    console.log("Production environment detected, forcing SSL!")
+    server.use(enforce.HTTPS())
+  };
 
   server.listen(PORT, (err) => {
     if (err) throw err

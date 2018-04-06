@@ -1,5 +1,6 @@
 import Header from './Header';
 import Head from './Head';
+import Footer from "./Footer";
 import stylesheet from 'styles/main.scss';
 
 const Layout = (props) => (
@@ -8,6 +9,7 @@ const Layout = (props) => (
     <Head title={props.title}/>
     <Header />
     {props.children}
+      <Footer url={props.url}/>
   </div>
 )
 

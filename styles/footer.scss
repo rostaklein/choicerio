@@ -1,0 +1,42 @@
+@import "./variables";
+
+footer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px 0;
+    @media (max-width: $small-size){
+        padding: 10px 0;
+    }
+    .image{
+        text-align: center;
+        margin-bottom: 20px;
+        @media (max-width: $small-size){
+            margin-bottom: 0;
+        }
+        .footer-logo{
+            max-width: 100px;
+            transition: all 0.3s;
+            @media (max-width: $small-size){
+                max-width: 80px;
+                padding: 10px;
+            }
+            &:hover{
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+        }
+    }
+    .text{
+        font-size: 12px;
+        color: $lightgray;
+        text-align: center;
+        padding: 10px;
+        i{
+            font-style: normal;
+            opacity: 0.5;
+            margin: 0 5px;
+        }
+    }
+}

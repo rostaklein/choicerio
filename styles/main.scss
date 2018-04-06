@@ -41,7 +41,7 @@ body{
     padding: 0 20px;
   }
   @media (max-width: $small-size) {
-    padding: 0 10px;
+    padding: 0 ;
   }
 }
 
@@ -84,6 +84,9 @@ header{
       cursor: pointer;
       text-align: right;
       flex: 1;
+      @media (max-width: $small-size) {
+        padding-right: 10px;
+      }
       @media (max-width: $medium-size){
         font-size: 12px;
       }
@@ -93,7 +96,6 @@ header{
 
 .page-title{
   font-size: 16px;
-  color: $gray;
 }
 
 ul.dropdown-menu{
@@ -350,6 +352,8 @@ nav{
     &.huge{
       font-size: 32px;
       font-weight: bold;
+      padding-left: 0;
+      padding-right: 0;
       @media (max-width: $medium-size){
         font-size: 22px;
       }
