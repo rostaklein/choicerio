@@ -1,5 +1,7 @@
 const express = require('express')
 const next = require('next')
+var enforce = require('express-sslify')
+
 const routes = require('./routes')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -12,6 +14,8 @@ app.prepare()
   const server = express()
 
   server.use(handler);
+  
+  if(!dev) server.use(enforce.HTTPS());
 
   server.listen(PORT, (err) => {
     if (err) throw err
