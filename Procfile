@@ -1,1 +1,1 @@
-web: npm run api
+web: node api/serverApi.js
