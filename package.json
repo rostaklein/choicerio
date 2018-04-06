@@ -7,7 +7,7 @@
     "api": "nodemon api/serverApi",
     "start": "node serverFrontend",
     "build": "next build",
-    "prod": "next start",
+    "prod": "NODE_ENV=production node serverFrontend && NODE_ENV=production nodemon api/serverApi",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next"
   },
@@ -33,6 +33,7 @@
     "next": "^5.0.0",
     "next-cookies": "^1.0.2",
     "next-redux-wrapper": "^1.0.0",
+    "next-routes": "^1.4.1",
     "node-fetch": "^2.1.1",
     "node-sass": "^4.4.0",
     "normalize.css": "^7.0.0",
