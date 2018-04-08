@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 import { reducer } from "./reducers"
 
-export const exampleInitialState = {
+export const initialState = {
   pageTitle: "",
   user: null,
   modal: null,
@@ -19,6 +19,6 @@ export const exampleInitialState = {
   }
 }
 
-export const initStore = (initialState = exampleInitialState) => {
+export const initStore = (initialState = initialState) => {
   return createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)))
 }

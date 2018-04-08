@@ -1,7 +1,7 @@
 import { actionTypes } from "./actions";
-import { exampleInitialState } from "./index";
+import { initialState } from "./index";
 
-export const reducer = (state = exampleInitialState, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
       case actionTypes.SETTITLE:
         return Object.assign({}, state, {
@@ -21,7 +21,7 @@ export const reducer = (state = exampleInitialState, action) => {
         })
       case actionTypes.RESETFORMDATA:
         return Object.assign({}, state, {
-          form: exampleInitialState.form
+          form: initialState.form
         })
       case actionTypes.EDITFORM:
         return Object.assign({}, state, {
