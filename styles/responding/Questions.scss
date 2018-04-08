@@ -1,0 +1,165 @@
+@import "../variables";
+
+header.questions{
+    .right{
+        color: $primary;
+        justify-content: right;
+        padding: 0 10px;
+        @media (max-width: $small-size){
+            padding-right: 20px;
+        }
+        .icon{
+            color: $primary;
+            opacity: 1;
+        }
+    }
+    .progress-bar{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background-color: desaturate(lighten($primary, 40), 30);
+        display: flex;
+        .filling{
+            background-color: $primary;
+            transition: width 1s ease-out;
+        }
+    }
+}
+
+.questions-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .nav-arrow{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        font-size: 90px;
+        width: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.1;
+        transition: all 0.3s;
+        &:hover{
+            opacity: 0.4;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        &.left{
+            left: -250px;
+        }
+        &.right{
+            right: -250px;
+        }
+        @media (max-width: 1450px){
+            font-size: 48px;
+            width: 110px;
+            &.left{
+                left: -110px;
+            }
+            &.right{
+                right: -110px;
+            }
+        }
+        @media (max-width: 1200px){
+            font-size: 36px;
+            top: auto;
+            opacity: 0.5;
+            width: 90px;
+            height: 70px;
+            bottom: -70px;
+            &:hover{
+                opacity: 0.8;
+            }
+            &.left{
+                left: 0;
+            }
+            &.right{
+                right: 0;
+            }
+        }
+        @media (max-width: $small-size){
+
+        }
+    }
+    .question{
+        flex-basis: 100%;
+        .detail{
+            @media (max-width: $small-size){
+                padding: 0 20px;
+                h1{
+                    font-size: 18px;
+                    margin: 10px 0 0 0;
+                }
+                .description{
+                    font-size: 13px;
+                }
+            }
+        }
+        .description{
+            color: $gray;
+            font-weight: normal;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+    }
+    .scale{
+        display: flex;
+        margin-top: 40px;
+        @media (max-width: $small-size){
+            flex-wrap: wrap;
+            margin-top: 0;
+            >div{
+                flex-basis: 100%;
+            }
+        }
+        .option{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 12px 0;
+            color: rgba(0, 0, 0, 0.6);
+            transition: color 0.3s;
+            @media (max-width: $medium-size){
+                font-size: 14px;
+            }
+            @media (max-width: $small-size){
+                flex-basis: 100%;
+                flex-direction: row;
+            }
+            &:hover{
+                color: black;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+            &:nth-child(1){
+                background-color: $primary;
+            }
+            &:nth-child(2){
+                background-color: desaturate(lighten($primary, 40), 30);
+            }
+            &:nth-child(3){
+                background-color: $lightgray;
+            }
+            &:nth-child(4){
+                background-color: $gray;
+            }
+            &:nth-child(5){
+                background-color: $black;
+            }
+            &:nth-child(1), &:nth-child(5){
+                color: rgba(255, 255, 255, 0.5);
+                &:hover{
+                    color: white;
+                }
+            }
+
+        }
+    }
+}

@@ -12,6 +12,10 @@ export const exampleInitialState = {
     description: "",
     questions: [],
     candidates: []
+  },
+  responding: {
+    step: "welcome",
+    answers: []
   }
 }
 

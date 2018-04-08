@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
 import { setFormData } from '../store/actions'
 import Form from "../components/Form"
-import FormResponding from "../components/FormResponding";
+import Responding from "../components/Responding";
 
 class DisplayForm extends Component {
     constructor(props){
@@ -49,7 +49,7 @@ class DisplayForm extends Component {
                                 <div className="message error centered"><b>{this.props.user.name}</b>&nbsp;is not permitted to edit&nbsp;<b>{this.props.form.name}</b>.</div>
                             )
                             :
-                            <FormResponding query={this.props.url.query}/>
+                            <Responding query={this.props.url.query}/>
                         )
                         
                         

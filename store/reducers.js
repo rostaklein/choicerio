@@ -27,7 +27,10 @@ export const reducer = (state = exampleInitialState, action) => {
         return Object.assign({}, state, {
           form: {...state.form, ...action.property}
         })
-        
+      case actionTypes.SETRESSTEP:
+        return Object.assign({}, state, {
+          responding: {...state.responding, step: action.step}
+        })
       default: return state
     }
   }

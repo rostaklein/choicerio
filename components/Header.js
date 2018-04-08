@@ -1,33 +1,12 @@
+import React, { Component } from 'react'
 import Router from 'next/router'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
+
 import { logOut, setActiveModal } from '../store/actions'
 import Login from "./Login"
 import Modal from "./Modal"
-import React, { Component } from 'react'
-
-// const
-//   menuItems=[
-//     {
-//       name: "Home",
-//       link: "/"
-//     },
-//     {
-//       name: "About",
-//       link: "/about"
-//     }
-//   ];    
-// {/* <ul className="menu">
-//   {
-//     menuItems.map(item =>
-//       <li key={item.name}>
-//         <Link href={item.link}>
-//           <a>{item.name}</a>
-//         </Link>
-//       </li>
-//     )
-//   }
-// </ul> */}
+import RespondingHeader from "./Responding/Header";
 
 class Header extends Component {
   constructor(props){
@@ -39,6 +18,7 @@ class Header extends Component {
   render () {
     const props = this.props;
     return (
+      props.url.query.action!="s" ?
         <header>
           <div className="left"></div>
           <div className="center">
@@ -67,15 +47,17 @@ class Header extends Component {
 
             }
           </div>
-          <Modal show={this.props.modal} onClose={()=>this.props.setActiveModal(null)}>
-            <Login afterSucc={this.props.modal && (() => this.props.modal.afterSucc())} />
+          <Modal show={props.modal} onClose={()=>props.setActiveModal(null)}>
+            <Login afterSucc={props.modal && (() =>props.modal.afterSucc())} />
           </Modal> 
         </header>
+        :
+        <RespondingHeader {...props}/>
     )
   }
 };
 
-const mapStateToProps = ({ form, user, modal, pageTitle }) => ({ form, user, modal, pageTitle })
+const mapStateToProps = ({ form, user, modal, pageTitle, responding }) => ({ form, user, modal, pageTitle, responding })
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -6,7 +6,8 @@ export const actionTypes = {
     SETMODAL: 'SETMODAL',
     EDITFORM: 'EDITFORM',
     SETFORMDATA: 'SETFORMDATA',
-    RESETFORMDATA: 'RESETFORMDATA'
+    RESETFORMDATA: 'RESETFORMDATA',
+    SETRESSTEP: 'SETRESSTEP'
 };
 
 export const setPageTitle = title => dispatch => {
@@ -30,4 +31,7 @@ export const resetFormData = () => dispatch => {
 }
 export const editForm = property => dispatch => {
     return dispatch({ type: actionTypes.EDITFORM, property: property})
+}
+export const setCurrentRespondingStep = step => dispatch => {
+    return dispatch({ type: actionTypes.SETRESSTEP, step: step})
 }

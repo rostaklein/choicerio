@@ -50,8 +50,8 @@ class MyForms extends Component {
                                     this.state.forms.map(form=>
                                         <li key={form.url}>
                                             <div className="buttons">
-                                                <Link route={"q/"+form.url+""}><button className="btn hasicon nobg"><span className="icon icon-eye"/><span className="text">View</span></button></Link>
-                                                <Link route={"q/"+form.url+"/edit"}><button className="btn hasicon nobg"><span className="icon icon-pencil"/> Edit</button></Link>
+                                                <Link route={"/q/"+form.url+""}><button className="btn hasicon nobg"><span className="icon icon-eye"/><span className="text">View</span></button></Link>
+                                                <Link route={"/q/"+form.url+"/edit"}><button className="btn hasicon nobg"><span className="icon icon-pencil"/> Edit</button></Link>
                                             </div>
                                             <div className="info">
                                                 <div className="top-part"><h2 className="form-name">{form.name}</h2></div>

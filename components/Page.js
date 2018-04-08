@@ -30,7 +30,9 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
 
           if(title){
             store.dispatch(setPageTitle(title))
-          }
+          }else(
+            store.dispatch(setPageTitle(""))
+          )
       
           return userHandling().then(data=>
             {
