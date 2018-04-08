@@ -30,7 +30,7 @@ class Questions extends Component {
             scale = ["strongly", "rather", "don't know", "rather", "strongly"];
 
         return(
-            <div class="questions-content">
+            <div className="questions-content">
                 <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
                 <div className="question">
                     <div className="detail">
