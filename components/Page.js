@@ -12,6 +12,9 @@ import Layout from './Layout';
 export default (Component, reqLogin, title) => withRedux(initStore, state => ({ state }))(
   class extends React.Component {
     static async getInitialProps({ store, isServer, req, pathname, query }) {
+
+          const state = store.getState();
+
           const userHandling = () => new Promise(resolve => {
               console.log("User handling going on.");
               let token;
@@ -20,8 +23,7 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
               }else{
                 token = Cookies.get("token") || ""
               }
-              // let user;
-              if(token){
+              if(token && !state.user){
                 getCurrentUser(token).then(user => {
                     store.dispatch(setActiveUser(user));
                     resolve("User set successfuly.")
@@ -35,15 +37,20 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
 
           const formHandling = () => new Promise(resolve => {
             console.log("Form handling going on.")
-            if(pathname=="/form" && query.id.length>0){
-              console.log("Loading form data!");
-              get("/form/byurl/"+query.id).then(res=>{
-                store.dispatch(setFormData(res));
-                resolve("Form data loaded.");
-              })
+            if(state.form.url == query.id){
+                console.log("Form already exists.");
+                resolve("Form already set.");
             }else{
-              resolve("No form id provided.");
-            };
+                if(pathname=="/form" && query.id.length>0){
+                  get("/form/byurl/"+query.id).then(res=>{
+                    store.dispatch(setFormData(res));
+                    console.log("Geting data for form");
+                    resolve("Form data loaded.");
+                  })
+                }else{
+                  resolve("No form id provided.");
+                };
+            }
           })
 
           if(title){
