@@ -1,7 +1,6 @@
 import Page from "../components/Page"
 import { Component } from 'react';
 import Loading from "../components/Loading";
-import { get } from "../apiMethods";
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux"
@@ -13,23 +12,17 @@ class DisplayForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            loading: true,
+            loading: props.form.name.length==0,
             error: false
         }
     }
-    componentDidMount(){
-        get("/form/byurl/"+this.props.url.query.id).then(res=>{
-            this.props.setFormData(res);
-            this.setState({
-                loading: false
-            })
-        }).catch(error=>{
-            this.setState({
-                loading: false,
-                error
-            })
+
+    componentWillReceiveProps(){
+        this.setState({
+            loading: this.props.form.name.length==0
         })
     }
+
     render(){
         return(
             this.state.loading ?
