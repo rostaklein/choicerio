@@ -121,36 +121,45 @@ header.questions{
             justify-content: center;
             padding: 12px 0;
             color: rgba(0, 0, 0, 0.6);
-            transition: color 0.3s;
+            transition: all 0.3s;
             @media (max-width: $medium-size){
                 font-size: 14px;
             }
             @media (max-width: $small-size){
                 flex-basis: 100%;  
             }
-            &:hover{
+            &:hover, &.active{
                 color: black;
                 cursor: pointer;
-                transition: color 0.3s;
+                transition: all 0.3s;
+            }
+            &.active{
+                transform: translateY(-5px);
+                z-index: 1;
             }
             &:nth-child(1){
                 background-color: $primary;
+                &.active{box-shadow: 0 0 20px $primary};
             }
             &:nth-child(2){
                 background-color: desaturate(lighten($primary, 40), 30);
+                &.active{box-shadow: 0 0 20px desaturate(lighten($primary, 40), 30)};
             }
             &:nth-child(3){
                 background-color: $lightgray;
+                &.active{box-shadow: 0 0 20px $lightgray};
             }
             &:nth-child(4){
                 background-color: $gray;
+                &.active{box-shadow: 0 0 20px $gray};
             }
             &:nth-child(5){
                 background-color: $black;
+                &.active{box-shadow: 0 0 20px $black};
             }
             &:nth-child(1), &:nth-child(5){
-                color: rgba(255, 255, 255, 0.5);
-                &:hover{
+                color: rgba(255, 255, 255, 0.8);
+                &:hover, &.active{
                     color: white;
                 }
             }

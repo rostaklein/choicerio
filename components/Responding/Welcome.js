@@ -2,9 +2,6 @@ import stylesheet from 'styles/responding/Welcome.scss';
 import { Link } from '../../routes';
 import Router from 'next/router';
 
-const onStartClick = (setStep, pathArguments, pathName) => {
-    
-}
 const Welcome = (props) =>
 <article className="form-responding">
     <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
@@ -27,7 +24,7 @@ const Welcome = (props) =>
     <div className="group-bot">
         {/* <Link route={"/q/"+props.query.id+"/s/"+(props.query.stepnumber+1 || 1)}> */}
         <button className="btn primary" onClick={()=>{
-            props.setCurrentRespondingStep("questions");
+            console.log("Whatever");
             Router.push(`/form?id=${props.query.id}&action=s&stepnumber=1`, `/q/${props.query.id}/s/1`);
         }}>
             <span className="text">Start now</span>

@@ -27,9 +27,9 @@ export const reducer = (state = initialState, action) => {
         return Object.assign({}, state, {
           form: {...state.form, ...action.property}
         })
-      case actionTypes.SETRESSTEP:
+      case actionTypes.ADD_ANSWER:
         return Object.assign({}, state, {
-          responding: {...state.responding, step: action.step}
+          answers: {...state.answers, [action.answer.question]: action.answer.option}
         })
       default: return state
     }

@@ -5,7 +5,6 @@ import stylesheet from 'styles/responding/Questions.scss';
 class Questions extends Component {
     constructor(props){
         super(props);
-        
     }
     onClickStep = next => {
         const
@@ -16,12 +15,29 @@ class Questions extends Component {
             url   = `/q/${formUrl}/s/`;
         if(next){
             console.log(query+(currentStep+1), url+(currentStep+1));
-            Router.push(query+(currentStep+1), url+(currentStep+1))
+            if((currentStep+1) > this.props.form.questions.length){
+                console.log("Finished the form with:", this.props.answers);
+            }else{
+                Router.push(query+(currentStep+1), url+(currentStep+1))
+            }
+            
         }else{
             console.log(query+(currentStep-1), url+(currentStep-1));
             Router.push(query+(currentStep-1), url+(currentStep-1))
         }
     }
+
+    vote = option => {
+        const
+            step = parseInt(this.props.query.stepnumber),
+            question = this.props.form.questions[step-1],
+            answer = {question: question._id, option};
+            this.props.addAnswer(answer);
+            setTimeout(()=>{
+                this.onClickStep(true);
+            }, 500);
+    }
+
     render(){
         const
             props = this.props,
@@ -38,11 +54,9 @@ class Questions extends Component {
                         <h2 className="description">{question.description}</h2>
                     </div>
                     <div className="scale">
-                        {/* <div className="label">agree</div> */}
                         {scale.map((option, i)=>
-                            <div key={i} className="option">{option}&nbsp;<span className="sub">{i<2 ? "agree" : (i>2 ? "disagree" : "")}</span></div>
+                            <div key={i} className={"option " +(this.props.answers[question._id]==i ? "active" : "")} onClick={()=>this.vote(i)}>{option}&nbsp;<span className="sub">{i<2 ? "agree" : (i>2 ? "disagree" : "")}</span></div>
                         )}
-                        {/* <div className="label">disagree</div> */}
                     </div>
                 </div>
                 {step>1 &&
