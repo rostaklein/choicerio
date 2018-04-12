@@ -87,16 +87,43 @@ header{
       color: $lightgray;
       margin-right: 5px;
     }
-    .user-profile{
+    .user-menu{
       position: relative;
-      cursor: pointer;
       text-align: right;
       flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      padding-right: 5px;
       @media (max-width: $small-size) {
         padding-right: 10px;
       }
       @media (max-width: $medium-size){
         font-size: 12px;
+      }
+      .user{
+        margin-right: 20px;
+        @media (max-width: $small-size) {
+          margin-right: 10px;
+        }
+      }
+      .burger-menu{
+        width: 20px;
+        height: 16px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        transition: all 0.3s;
+        &:hover, &.active{
+          height: 10px;
+          padding: 3px 0;
+          transition: all 0.3s;
+        }
+        cursor: pointer;
+        >span{
+          height: 2px;
+          background: $lightgray;
+        }
       }
     }
   }
@@ -109,6 +136,7 @@ header{
 ul.dropdown-menu{
   position: absolute;
   right: 0;
+  top: 100%;
   padding: 0;
   margin: 15px 0 0 -5px;
   list-style: none;

@@ -12,8 +12,13 @@ class Header extends Component {
   constructor(props){
     super(props);
     this.state = {
-      profileDetailOpen: false
+      menuIsOpened: false
     }
+  }
+  openMenuHandler = () => {
+    this.setState({
+      menuIsOpened: !this.state.menuIsOpened
+    })
   }
   render () {
     const props = this.props;
@@ -28,10 +33,12 @@ class Header extends Component {
           </div>
           <div className="right">
             {props.user ?
-              <div className="user-profile" onClick={()=>this.setState({profileDetailOpen: !this.state.profileDetailOpen})}>
-                <span className="icon icon-person" /> {props.user.name}
-                {this.state.profileDetailOpen &&
-                    <ul className="dropdown-menu">
+              <div className="user-menu">
+                <div className="user">
+                  <span className="icon icon-person" /> {props.user.name}
+                </div>
+                {this.state.menuIsOpened &&
+                    <ul className="dropdown-menu" onClick={this.openMenuHandler}>
                       {/* <li><span className="icon icon-question"></span> My Forms</li>
                       <li><span className="icon icon-person"></span> Profile</li> */}
                       <li onClick={()=>Router.push("/new")}><span className="icon icon-plus"></span> New Form</li>
@@ -39,6 +46,7 @@ class Header extends Component {
                       <li onClick={()=>this.props.logOut()}><span className="icon icon-exit"></span> Log Out</li>
                     </ul>
                 }
+                <div className={"burger-menu " +(this.state.menuIsOpened ? "active" : "")} onClick={this.openMenuHandler}><span></span><span></span><span></span></div>
               </div>
               :
               <div className="user-profile" onClick={()=>this.props.setActiveModal({name: "login"})}>
