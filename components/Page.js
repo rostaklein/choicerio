@@ -36,15 +36,15 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
           });
 
           const formHandling = () => new Promise(resolve => {
-            console.log("Form handling going on.")
+            //console.log("Form handling going on.")
             if(state.form.url == query.id){
-                console.log("Form already exists.");
+                //console.log("Form already exists.");
                 resolve("Form already set.");
             }else{
                 if(pathname=="/form" && query.id.length>0){
                   get("/form/byurl/"+query.id).then(res=>{
                     store.dispatch(setFormData(res));
-                    console.log("Geting data for form");
+                    //console.log("Geting data for form");
                     resolve("Form data loaded.");
                   })
                 }else{

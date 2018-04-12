@@ -15,15 +15,16 @@ class Questions extends Component {
             query = `/form?id=${formUrl}&action=s&stepnumber=`,
             url   = `/q/${formUrl}/s/`;
         if(next){
-            console.log(query+(currentStep+1), url+(currentStep+1));
+            //console.log(query+(currentStep+1), url+(currentStep+1));
             if((currentStep+1) > this.props.form.questions.length){
                 console.log("Finished the form with:", this.props.answers);
+                Router.push(`/form?id=${formUrl}&action=results`, `/q/${formUrl}/results/`)
             }else{
                 Router.push(query+(currentStep+1), url+(currentStep+1))
             }
             
         }else{
-            console.log(query+(currentStep-1), url+(currentStep-1));
+            //console.log(query+(currentStep-1), url+(currentStep-1));
             Router.push(query+(currentStep-1), url+(currentStep-1))
         }
     }
