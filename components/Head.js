@@ -5,7 +5,7 @@ const PageHead = (props) =>
 		<Head>
 			<title>
 			{
-				props.form.name.length>0
+				(props.url.query.action=="s" && props.form.name.length>0)
 				?
 				props.form.name + " | choicer.io"
 				:
@@ -30,5 +30,5 @@ const PageHead = (props) =>
 			<link rel="stylesheet" href="/static/fonts/fonticons.css" />
 			<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 		</Head>,
-	mapStateToProps = ({ form, url, pageTitle }) => ({ form, url, pageTitle })
+	mapStateToProps = ({ form, pageTitle }) => ({ form, pageTitle })
 export default connect(mapStateToProps)(PageHead);

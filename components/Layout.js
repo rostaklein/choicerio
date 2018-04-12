@@ -6,7 +6,7 @@ import stylesheet from 'styles/main.scss';
 const Layout = (props) => (
   <div className="layout">
     <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-      <Head title={props.title}/>
+      <Head title={props.title} url={props.url}/>
       <Header url={props.url}/>
       <main>
         {props.children}

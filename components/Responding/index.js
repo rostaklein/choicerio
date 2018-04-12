@@ -6,6 +6,7 @@ import { Link } from '../../routes'
 
 import Welcome from "./Welcome";
 import Questions from "./Questions";
+import Results from "./Results";
 
 export class Responding extends Component {
   constructor(props){
@@ -18,7 +19,12 @@ export class Responding extends Component {
         (this.props.query.action=="s" && step<=this.props.form.questions.length) ?
         <Questions {...this.props} step={step}/>
         :
+        (this.props.query.action=="results" ?
+        <Results {...this.props}/>
+        :
         <Welcome {...this.props}/>
+        )
+        
       );
   }
 

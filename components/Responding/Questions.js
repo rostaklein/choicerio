@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import { Component } from "react";
 import stylesheet from 'styles/responding/Questions.scss';
+import { scale } from "../../constants";
 
 class Questions extends Component {
     constructor(props){
@@ -42,8 +43,7 @@ class Questions extends Component {
         const
             props = this.props,
             step = parseInt(props.query.stepnumber),
-            question = props.form.questions[step-1],
-            scale = ["strongly", "rather", "don't know", "rather", "strongly"];
+            question = props.form.questions[step-1];
 
         return(
             <div className="questions-content">
