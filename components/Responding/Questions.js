@@ -2,6 +2,7 @@ import Router from 'next/router'
 import { Component } from "react";
 import stylesheet from 'styles/responding/Questions.scss';
 import { scale } from "../../constants";
+import { post } from "../../apiMethods";
 
 class Questions extends Component {
     constructor(props){
@@ -17,7 +18,17 @@ class Questions extends Component {
         if(next){
             //console.log(query+(currentStep+1), url+(currentStep+1));
             if((currentStep+1) > this.props.form.questions.length){
-                console.log("Finished the form with:", this.props.answers);
+                let submission = {
+                    form: this.props.form._id,
+                    answers: Object.entries(this.props.answers).map(([question, vote])=>({question, vote}))
+                };
+                if(this.props.candidate){
+                    submission = {
+                        ...submission,
+                        candidate: this.props.candidate
+                    }
+                }
+                post("/submission/", submission).then(res=> console.log("Submission successful", res))
                 Router.push(`/form?id=${formUrl}&action=results`, `/q/${formUrl}/results/`)
             }else{
                 Router.push(query+(currentStep+1), url+(currentStep+1))

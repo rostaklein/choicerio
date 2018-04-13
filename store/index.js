@@ -13,7 +13,8 @@ export const initialState = {
     questions: [],
     candidates: []
   },
-  answers: {}
+  answers: {},
+  errors: {}
 }
 
 export const initStore = (initialState = initialState) => {

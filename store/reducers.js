@@ -31,6 +31,14 @@ export const reducer = (state = initialState, action) => {
         return Object.assign({}, state, {
           answers: {...state.answers, [action.answer.question]: action.answer.option}
         })
+      case actionTypes.SET_CANDIDATE:
+        return Object.assign({}, state, {
+          candidate: action.candidate
+        })
+      case actionTypes.ADD_ERROR:
+        return Object.assign({}, state, {
+          errors: {...state.errors, [action.error.type]: action.error.msg}
+        })
       default: return state
     }
   }

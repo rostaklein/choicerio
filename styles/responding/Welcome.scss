@@ -21,6 +21,9 @@
         font-size: 16px;
         margin: 0;
     }
+    h3{
+        text-align: center;
+    }
     ul{
         list-style-type: none;
         display: flex;
@@ -50,5 +53,28 @@
     .group-bot{
         display: flex;
         flex-direction: column;
+    }
+    .group-top{
+        display: flex;
+        flex-direction: column;
+    }
+    .candidate{
+        background: whitesmoke;
+        align-self: center;
+        margin-bottom: 25px;
+        padding: 20px 35px;
+        display: flex;
+        flex-direction: column;
+        h3{
+            margin: 10px 0;
+        }
+        .top, .bot{
+            color: $gray;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .top{
+            font-size: 13px;
+        }
     }
 }

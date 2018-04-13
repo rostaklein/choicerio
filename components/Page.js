@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import cookie from "cookie"
 
 import { initStore } from "../store/index"
-import { setActiveUser, setPageTitle, setFormData } from "../store/actions"
+import { setActiveUser, setPageTitle, setFormData, addError } from "../store/actions"
 import { get, getCurrentUser } from "../apiMethods"
 import Layout from './Layout';
 
@@ -16,7 +16,7 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
           const state = store.getState();
 
           const userHandling = () => new Promise(resolve => {
-              console.log("User handling going on.");
+              //console.log("User handling going on.");
               let token;
               if (isServer){
                 token = req.headers.cookie && cookie.parse(req.headers.cookie).token;
@@ -31,7 +31,7 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
                     resolve("User not found by the token provided.")
                   });
               }else{
-                resolve("No token provided.")
+                resolve("No token provided or user already set.")
               }
           });
 
@@ -46,6 +46,9 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
                     store.dispatch(setFormData(res));
                     //console.log("Geting data for form");
                     resolve("Form data loaded.");
+                  }).catch(err=>{
+                    store.dispatch(addError({type: "form_not_found", msg: "Form not found."}))
+                    resolve("Error finding the form", err)
                   })
                 }else{
                   resolve("No form id provided.");
@@ -62,7 +65,7 @@ export default (Component, reqLogin, title) => withRedux(initStore, state => ({ 
           return Promise.all([
             userHandling(),
             formHandling()
-          ]) 
+          ])
     }
     render() {
       return (

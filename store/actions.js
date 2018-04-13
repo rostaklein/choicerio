@@ -7,7 +7,9 @@ export const actionTypes = {
     EDITFORM: 'EDITFORM',
     SETFORMDATA: 'SETFORMDATA',
     RESETFORMDATA: 'RESETFORMDATA',
-    ADD_ANSWER: 'ADD_ANSWER'
+    ADD_ANSWER: 'ADD_ANSWER',
+    SET_CANDIDATE: 'SET_CANDIDATE',
+    ADD_ERROR: 'ADD_ERROR'
 };
 
 export const setPageTitle = title => dispatch => {
@@ -34,4 +36,10 @@ export const editForm = property => dispatch => {
 }
 export const addAnswer = answer => dispatch => {
     return dispatch({ type: actionTypes.ADD_ANSWER, answer })
+}
+export const setAnsweringCandidate = candidate => dispatch => {
+    return dispatch({ type: actionTypes.SET_CANDIDATE, candidate })
+}
+export const addError = ({type, msg}) => dispatch => {
+    return dispatch({ type: actionTypes.ADD_ERROR, error: {type, msg} })
 }

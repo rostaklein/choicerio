@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setPageTitle, addAnswer } from '../../store/actions';
+import { setAnsweringCandidate, addAnswer } from '../../store/actions';
 import React, { Component } from 'react';
 import { Link } from '../../routes'
 
@@ -12,6 +12,11 @@ export class Responding extends Component {
   constructor(props){
     super(props);
   }
+  componentWillMount(){
+    if(this.props.query.action=="candidate"){
+      this.props.setAnsweringCandidate(this.props.query.stepnumber);
+    }
+  }
   render(){
     let
       step = parseInt(this.props.query.stepnumber);
@@ -22,7 +27,7 @@ export class Responding extends Component {
         (this.props.query.action=="results" ?
         <Results {...this.props}/>
         :
-        <Welcome {...this.props}/>
+          <Welcome {...this.props}/>     
         )
         
       );
@@ -30,11 +35,12 @@ export class Responding extends Component {
 
 }
 
-const mapStateToProps = ({ form, answers}) => ({ form, answers})
+const mapStateToProps = ({ form, answers, candidate}) => ({ form, answers, candidate})
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addAnswer: bindActionCreators(addAnswer, dispatch)
+    addAnswer: bindActionCreators(addAnswer, dispatch),
+    setAnsweringCandidate: bindActionCreators(setAnsweringCandidate, dispatch)
   }
 }
 
