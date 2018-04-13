@@ -17,6 +17,9 @@ export class Responding extends Component {
       this.props.setAnsweringCandidate(this.props.query.stepnumber);
     }
   }
+  componentWillUnmount(){
+    this.props.setAnsweringCandidate(null);
+  }
   render(){
     let
       step = parseInt(this.props.query.stepnumber);

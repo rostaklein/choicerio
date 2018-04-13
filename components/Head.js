@@ -5,7 +5,7 @@ const PageHead = (props) =>
 		<Head>
 			<title>
 			{
-				(props.url.query.action=="s" && props.form.name.length>0)
+				((props.url.query.id && props.url.query.id.length>0) && props.form.name.length>0)
 				?
 				props.form.name + " | choicer.io"
 				:
