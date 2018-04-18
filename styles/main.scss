@@ -409,7 +409,6 @@ nav{
       @media (max-width: $medium-size){
         font-size: 14px;
       }
-      color: $gray;
     }
   }
   &.has-error{
@@ -447,6 +446,22 @@ nav{
     }
     input{
       border-color: $success;
+      transition: all 0.3s;
+    }
+  }
+  label.small{
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    top: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: $gray;
+    transition: all 0.3s;
+    &.active{
+      top: -8px;
+      opacity: 1;
       transition: all 0.3s;
     }
   }

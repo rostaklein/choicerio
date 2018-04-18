@@ -8,7 +8,7 @@ import Transition from 'react-addons-css-transition-group'
 import { post, get, remove, put } from "../apiMethods";
 import Loading from "./Loading"
 
-const menuItems = ["Questions", "Candidates", "Statistics"];
+const menuItems = ["Questions", "Candidates"];
 
 class Form extends Component {
     constructor(props){
@@ -158,9 +158,11 @@ class Form extends Component {
         return(
             <div>
             <div className="form-control">
+                <label className={"small "+(this.props.form.name.length>0 ? "active" : "")}>Form name:</label>
                 <input type="text" name="name" className="transparent huge" placeholder="Enter form name" onChange={this.inputChange} value={this.props.form.name}/>
             </div>
             <div className="form-control">
+                <label className={"small "+(this.props.form.description.length>0 ? "active" : "")}>Description:</label>
                 <input type="text" name="description" className="transparent medium" placeholder="Enter description" onChange={this.inputChange} value={this.props.form.description}/>
             </div>
             <ul className="switch-nav huge-icons" style={{marginBottom: 20}}>
