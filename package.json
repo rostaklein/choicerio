@@ -36,6 +36,7 @@
     "raw-loader": "^0.5.1",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-animated-number": "^0.4.4",
     "react-dom": "^16.2.0",
     "react-facebook-login": "^4.0.1",
     "react-redux": "^5.0.1",

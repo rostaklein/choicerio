@@ -13,7 +13,7 @@ export const calculate = (res, cand) =>
     const
         seq = compare(res, cand),
         perItem = 100/seq.length;
-    return seq.reduce((acc, curr)=>{
+    return Math.round(seq.reduce((acc, curr)=>{
         if(curr.diff==0){
             acc+=perItem;
         }
@@ -21,5 +21,5 @@ export const calculate = (res, cand) =>
             acc+=perItem/2;
         }
         return acc;
-    }, 0);
+    }, 0)*100)/100;
 }

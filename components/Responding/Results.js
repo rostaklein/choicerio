@@ -1,8 +1,6 @@
 import stylesheet from 'styles/responding/Results.scss';
-import { Link } from '../../routes';
-import Router from 'next/router';
-import { compare, calculate } from "../../logic/compare";
-import { scale } from "../../constants";
+import { calculate } from "../../logic/compare";
+import AnimatedNumber from 'react-animated-number';
 
 const CalcResults = (answers, form) => 
     form.candidates
@@ -16,7 +14,8 @@ const CalcResults = (answers, form) =>
 const Results = (props) => {
     const
         calculated = CalcResults(props.answers, props.form),
-        hasResult = calculated.filter(res=>res.result);
+        hasResult = calculated.filter(res=>res.result),
+        speed = 1000;
 
     if(props.candidate){
         return <article className="form-results">
@@ -34,9 +33,25 @@ const Results = (props) => {
                     {hasResult.map(candidate =>
                         <li key={candidate._id}>
                             <div className="result-sub">Your opinions align by:</div>
-                            <div className="percent">{candidate.result}%</div>
+                            <div className="percent">
+                            <AnimatedNumber
+                                component="text"
+                                value={candidate.result}
+                                style={{
+                                    transition: '0.8s ease-out',
+                                    fontSize: 32,
+                                    transitionProperty:
+                                        'background-color, color, opacity'
+                                }}
+                                frameStyle={perc => (
+                                    perc === 100 ? {} : {color: 'gray'}
+                                )}
+                                duration={candidate.result/speed*20000}
+                                formatValue={n => (Math.round(n*100)/100)+"%"}/>
+                            </div>
                             <div className="result-sub">with</div>
                             <h2>{candidate.title}</h2>
+                            <div className="result-sub">{candidate.description}</div>
                             {/* <div>
                                 {props.form.candidateSubmissions[candidate._id] ?
                                 <div>
