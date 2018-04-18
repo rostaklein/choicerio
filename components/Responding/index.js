@@ -27,7 +27,7 @@ export class Responding extends Component {
         (this.props.query.action=="s" && step<=this.props.form.questions.length) ?
         <Questions {...this.props} step={step}/>
         :
-        (this.props.query.action=="results" ?
+        (Object.keys(this.props.answers).length>0 && this.props.query.action=="results" ?
         <Results {...this.props}/>
         :
           <Welcome {...this.props}/>     
