@@ -67,7 +67,7 @@ class Questions extends Component {
                     </div>
                     <div className="scale">
                         {scale.map((option, i)=>
-                            <div key={i} className={"option " +(this.props.answers[question._id]==i ? "active" : "")} onClick={()=>this.vote(i)}>{option}&nbsp;<span className="sub">{i<2 ? "agree" : (i>2 ? "disagree" : "")}</span></div>
+                            <div key={i} className={"option " +(this.props.answers[question._id]==i ? "active" : "")} onClick={()=>this.vote(i)}>{option}</div>
                         )}
                     </div>
                 </div>

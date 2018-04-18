@@ -1,0 +1,52 @@
+@import "../variables";
+
+.form-results{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3{
+        text-align: center;
+        font-weight: normal;
+        color: $gray;
+    }
+    h1{
+        text-align: center;
+    }
+    .candidates{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        li{
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin: 10px;
+            padding: 25px 35px;
+        }
+        .result-sub{
+            color: $gray;
+            font-size: 14px;
+        }
+        h2{
+            margin: 10px 0 0 0;
+        }
+        .percent{
+            font-size: 28px;
+            color: $primary;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    }
+    .no-values{
+        color: $gray;
+        font-size: 14px;
+        ol{
+            li{
+                padding-left: 10px;
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
