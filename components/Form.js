@@ -7,6 +7,7 @@ import EditableList from "./EditableList";
 import Transition from 'react-addons-css-transition-group'
 import { post, get, remove, put } from "../apiMethods";
 import Loading from "./Loading"
+import CandidateResponses from './CandidateResponses';
 
 const menuItems = ["Questions", "Candidates"];
 
@@ -176,6 +177,16 @@ class Form extends Component {
                         <div>{item}</div>
                     </li>
                 )}
+                {this.props.editMode &&
+                    <li
+                    className={this.state.activeTab==="candidate-responses" ? "active" : ""}
+                    onClick={()=>this.setState({activeTab: "candidate-responses"})}
+                    key={"candidate-responses"}
+                    >
+                        <span className={"icon icon-questions"} />
+                        <div>Candidate responses</div>
+                    </li>
+                }
             </ul>
             {this.state.activeTab === "Questions" &&
                 <EditableList
@@ -190,6 +201,9 @@ class Form extends Component {
                     onItemsChange={(items) => this.editStateAndRedux("candidates", items)}
                     itemName="Candidate"
                 />
+            }
+            {this.state.activeTab === "candidate-responses" &&
+                <CandidateResponses candidates={this.props.form.candidates} url={this.props.form.url}/>
             }
             <div className="form-buttons">
                 {!this.state.valid && !this.props.editMode &&

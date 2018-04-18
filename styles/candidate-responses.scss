@@ -1,0 +1,35 @@
+@import "./variables";
+
+.candidate-responses{
+    list-style-type: none;
+    padding: 0;
+    li{
+        margin-bottom: 15px;
+        display: flex;
+        div{
+            flex: 1 0;
+        }
+        .info{
+            color: $gray;
+        }
+        h2{
+            margin: 10px 0;
+        }
+        .buttons{
+            display: flex;
+            a{
+                text-decoration: inherit;
+            }
+        }
+        .link{
+            background: $lightgray;
+            font-size: 13px;
+            padding: 10px 25px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: none;
+            text-align: center;
+            width: 100%;
+        }
+    }
+}
