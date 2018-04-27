@@ -17,7 +17,7 @@ app.prepare()
   
   if(!dev){
     console.log("Production environment detected, forcing SSL!")
-    server.use(enforce.HTTPS())
+    server.use(enforce.HTTPS({ trustProtoHeader: true }));
   };
 
   server.listen(PORT, (err) => {
